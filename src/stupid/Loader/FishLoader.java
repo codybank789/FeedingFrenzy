@@ -14,15 +14,16 @@ public class FishLoader {
     public static final int SIZEOFFISH = 3;
     public static final int TYPEOFFISH = 11;
     public static final int TYPEOFANIMATION = 3;
-    public static Vector<GameImage>[][][] listImage = new Vector[SIZEOFFISH][TYPEOFFISH][TYPEOFANIMATION];
+    public static final int TYPEFPLIP = 2;
+    public static Vector<GameImage>[][][][] listImage = new Vector[SIZEOFFISH][TYPEOFFISH][TYPEOFANIMATION][TYPEFPLIP];
 
     static {
         int i=1;
-        int j,k,l,m;
+        int j,k,l,m,n;
         for ( j = 0;j<TYPEOFFISH;j++) {
             int numberofimg = 0;
             for (k = 0; k < TYPEOFANIMATION; k++) {
-                listImage[i][j][k] = new Vector<>();
+                listImage[i][j][k][0] = new Vector<>();
 
                 int count = checkType(j+1, k+1);
                 for (l = 0; l < count; l++) {
@@ -31,36 +32,68 @@ public class FishLoader {
                     int length = value.length();
                     for (m = 0; m < 3 - length; m++)
                         value = "0" + value;
-                    listImage[i][j][k].add(new GameImage("res/Fish" + "/Fish" + String.valueOf(j+1) + "/" + value + ".png"));
+                    listImage[i][j][k][0].add(new GameImage("res/Fish" + "/Fish" + String.valueOf(j+1) + "/" + value + ".png"));
                 }
             }
         }
         for(j =0;j<TYPEOFFISH;j++)
-            for(k= 0;j<TYPEOFANIMATION;k++)
+            for(k= 0;k<TYPEOFANIMATION;k++)
             {
                 int count = checkType(j+1,k+1);
                 for(l=0;l<count;l++) {
-                    GameImage gameImage = listImage[1][j][j].get(l);
+                    GameImage gameImage = listImage[1][j][k][0].get(l).clone();
                     gameImage.resizeImage(0.5);
-                    listImage[2][j][k].add(gameImage);
+                    listImage[2][j][k][0].add(gameImage);
                 }
             }
         for(j =0;j<TYPEOFFISH;j++)
-            for(k= 0;j<TYPEOFANIMATION;k++)
+            for(k= 0;k<TYPEOFANIMATION;k++)
             {
                 int count = checkType(j+1,k+1);
                 for(l=0;l<count;l++) {
-                    GameImage gameImage = listImage[1][j][j].get(l);
+                    GameImage gameImage = listImage[1][j][k][0].get(l).clone();
                     gameImage.resizeImage(2);
-                    listImage[3][j][k].add(gameImage);
+                    listImage[3][j][k][0].add(gameImage);
                 }
             }
+        for(j =0;j<TYPEOFFISH;j++)
+            for(k= 0;k<TYPEOFANIMATION;k++)
+            {
+                int count = checkType(j+1,k+1);
+                for(l=0;l<count;l++) {
+                    GameImage gameImage = listImage[1][j][k][1].get(l).clone();
+                    gameImage.flipImage();
+                    listImage[1][j][k][1].add(gameImage);
+                }
+            }
+        for(j =0;j<TYPEOFFISH;j++)
+            for(k= 0;k<TYPEOFANIMATION;k++)
+            {
+                int count = checkType(j+1,k+1);
+                for(l=0;l<count;l++) {
+                    GameImage gameImage = listImage[2][j][k][1].get(l).clone();
+                    gameImage.flipImage();
+                    listImage[2][j][k][1].add(gameImage);
+                }
+            }
+        for(j =0;j<TYPEOFFISH;j++)
+            for(k= 0;k<TYPEOFANIMATION;k++)
+            {
+                int count = checkType(j+1,k+1);
+                for(l=0;l<count;l++) {
+                    GameImage gameImage = listImage[2][j][k][1].get(l).clone();
+                    gameImage.flipImage();
+                    listImage[3][j][k][1].add(gameImage);
+                }
+            }
+
+
     }
-    public static Vector getImages(int size, int typeFish, int typeAnimation)
+    public static Vector getImages(int size, int typeFish, int typeAnimation,int flip)
     {
         System.out.println(size + " " + typeFish + " " + typeAnimation);
-        System.out.println(listImage[size][typeFish][typeAnimation].size());
-        return listImage[size][typeFish][typeAnimation];
+        System.out.println(listImage[size][typeFish][typeAnimation][flip].size());
+        return listImage[size][typeFish][typeAnimation][flip];
     }
     private static int checkType(int j,int k)
     {
