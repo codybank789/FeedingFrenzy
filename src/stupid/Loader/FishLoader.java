@@ -11,38 +11,37 @@ import java.util.Vector;
  */
 public class FishLoader {
 
-    private Vector<GameImage>[][][] listImage;
     public static final int SIZEOFFISH = 3;
     public static final int TYPEOFFISH = 11;
     public static final int TYPEOFANIMATION = 3;
-    private GameImage gameImage ;
-    private int numberofimg =1;
-    public FishLoader()
-    {
-        listImage = new Vector[SIZEOFFISH][TYPEOFFISH][TYPEOFANIMATION];
-    }
-    public void loadAll()
-    {
+    public static Vector<GameImage>[][][] listImage = new Vector[SIZEOFFISH][TYPEOFFISH][TYPEOFANIMATION];
+
+    static {
         int i=1;
         for (int j = 0;j<TYPEOFFISH;j++) {
-            numberofimg=0;
+            int numberofimg = 0;
             for (int k = 0; k < TYPEOFANIMATION; k++) {
-                for (int l = 0; l < checkType(j, k); l++) {
+                listImage[i][j][k] = new Vector<>();
+
+                int count = checkType(j+1, k+1);
+                for (int l = 0; l < count; l++) {
                     numberofimg++;
                     String value = String.valueOf(numberofimg);
-                    for (int m = 0; m < 3 - value.length(); m++)
+                    int length = value.length();
+                    for (int m = 0; m < 3 - length; m++)
                         value = "0" + value;
-                    gameImage = new GameImage("res/Fish" + String.valueOf(j) + "/Fish/" + value + ".png");
-                    listImage[i][j][k].add(gameImage);
+                    listImage[i][j][k].add(new GameImage("res/Fish" + "/Fish" + String.valueOf(j+1) + "/" + value + ".png"));
                 }
             }
         }
     }
-    private Vector getImages(int size, int typeFish, int typeAnimation)
+    public static Vector getImages(int size, int typeFish, int typeAnimation)
     {
+        System.out.println(size + " " + typeFish + " " + typeAnimation);
+        System.out.println(listImage[size][typeFish][typeAnimation].size());
         return listImage[size][typeFish][typeAnimation];
     }
-    private int checkType(int j,int k)
+    private static int checkType(int j,int k)
     {
         int check =0;
         switch (j)
@@ -50,13 +49,13 @@ public class FishLoader {
             case 1:
                 switch (k){
                     case 1:
-                        check=14;
+                        check=13;
                         break;
                     case 2:
-                        check=7;
+                        check=5;
                         break;
                     case 3:
-                        check =5;
+                        check =7;
                         break;
                 }
                 break;

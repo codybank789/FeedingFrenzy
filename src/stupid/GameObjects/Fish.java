@@ -19,7 +19,7 @@ public class Fish extends GameObject {
         for(int i = 0; i < FishLoader.TYPEOFANIMATION; i++) {
             animationList.add(new GameAnimation(1, fishType, i));
         }
-        animationList.get(2).flipAnimation();
+        animationList.get(1).flipAnimation();
 
         pos.direction = direction;
         //pos.w = animationList.get(1).getWidth();
@@ -48,17 +48,19 @@ public class Fish extends GameObject {
             pos.x -= 3;
             if (pos.direction == -1) {
                 flip();
-                setAnimation(animationList.get(2));
+                setAnimation(animationList.get(1));
                 pos.direction = 1;
             }
         } else if (delta < -5){
             pos.x += 3;
             if (pos.direction == 1) {
                 flip();
-                setAnimation(animationList.get(2));
+                setAnimation(animationList.get(1));
                 pos.direction = -1;
             }
         }
+
+        pos.y += -Math.signum(pos.y - pInfo.getLocation().y) * 3;
     }
 
     public GameAnimation getCurrentAnimation() {
@@ -67,7 +69,7 @@ public class Fish extends GameObject {
         }
 
         if (currentAnimation.isEmpty()) {
-            currentAnimation.add(animationList.elementAt(1));
+            currentAnimation.add(animationList.get(0));
         }
 
         return currentAnimation.getFirst();

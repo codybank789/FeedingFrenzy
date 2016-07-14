@@ -26,7 +26,7 @@ public class GameAnimation {
 
     public void update() {
         count++;
-        currentImage = count / 10;
+        currentImage = count / 5;
         time = currentImage / imageList.size();
         currentImage = currentImage % imageList.size();
     }
