@@ -51,7 +51,6 @@ public class MenuScreen extends Screen {
                     ScreenManager.push(new GameLoadingScreen());
                     Thread thread = new Thread(new FishLoader());
                     thread.start();
-                    //loadImage();
                 }
 
                 if (currentMousePos.isInside(OPTIONTIME_POSITION)) {
