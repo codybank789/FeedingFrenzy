@@ -11,6 +11,8 @@ import stupid.Screen.ScreenManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -24,19 +26,13 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
     public static final int WINDOWWIDTH = 800;
     public static final int WINDOWHEIGHT = 600;
 
-    PlayerFish stupidFish;
-    AutoFish zombieFish;
-    GameImage test;
     BufferedImage background;
     BufferedImage bufferedScreen = new BufferedImage(WINDOWWIDTH, WINDOWHEIGHT, BufferedImage.TYPE_INT_ARGB);
 
 
     public GameWindow() {
         initWindows();
-//        initCursor();
 
-        stupidFish = new PlayerFish(0, 1, new Position(100, 100), this);
-        zombieFish = new AutoFish(0, 1, Position.RANDOM(), this);
         try {
             background = ImageIO.read(new File("res/airPlanesBackground.png"));
         }catch (IOException e) {
@@ -44,16 +40,20 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
         }
     }
 
-//    void initCursor() {
-//        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB) {
-//        }, new Point(0, 0), "custom cursor"));
-//    }
+    public void hideCursor() {
+        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB)
+                , new Point(0, 0), "custom cursor"));
+        //setCursor(Cursor.DEFAULT_CURSOR);
+    }
 
     void initWindows() {
+        Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB)
+                , new Point(0, 0), "custom cursor");
         this.setTitle("Bloe <3");
         this.setSize(WINDOWWIDTH, WINDOWHEIGHT);
         this.setVisible(true);
-        ScreenManager.getInstance().getStackScreen().push(new MenuScreen());
+        ScreenManager.setFrame(this);
+        ScreenManager.push(new MenuScreen());
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -61,22 +61,22 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
                 System.exit(69);
             }
         });
+
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ScreenManager.mouseClicked(e);
+            }
+        });
     }
 
     @Override
     public void update(Graphics g) {
-//        bufferedScreen.getGraphics().drawImage(background, 0, 0, null);
-//        stupidFish.draw(bufferedScreen.getGraphics());
-//        zombieFish.draw(bufferedScreen.getGraphics());
-//        g.drawImage(bufferedScreen, 0, 0, null);
-//        g.clearRect(0,0,WINDOWWIDTH,WINDOWHEIGHT);
         ScreenManager.getInstance().getStackScreen().peek().draw(bufferedScreen.getGraphics());
         g.drawImage(bufferedScreen,0,0,null);
     }
 
     void gameLoop() {
-//        stupidFish.update();
-//        zombieFish.update();
         ScreenManager.getInstance().getStackScreen().peek().update();
         repaint();
         try {

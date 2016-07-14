@@ -9,15 +9,21 @@ import java.util.Vector;
 /**
  * Created by Yuu on 7/13/2016.
  */
-public class FishLoader {
-
+public class FishLoader implements Runnable{
+    public static int loadedImages = 0;
     public static final int SIZEOFFISH = 3;
     public static final int TYPEOFFISH = 11;
     public static final int TYPEOFANIMATION = 3;
     public static final int TYPEFPLIP = 2;
     public static Vector<GameImage>[][][][] listImage = new Vector[SIZEOFFISH][TYPEOFFISH][TYPEOFANIMATION][TYPEFPLIP];
 
-    static {
+    static public int getNumberOfLoadedImages() {
+        return loadedImages;
+    }
+
+    public FishLoader() {}
+
+    static public void initImage() {
         int i = 1;
         int j, k, l, m, n;
         for (j = 0; j < TYPEOFFISH; j++) {
@@ -64,6 +70,8 @@ public class FishLoader {
                     }
                 }
         }
+
+        System.out.println(loadedImages + "fasfdasf");
     }
 
     public static Vector getImages(int size, int typeFish, int typeAnimation, int flip) {
@@ -220,5 +228,10 @@ public class FishLoader {
                 break;
         }
         return check;
+    }
+
+    @Override
+    public void run() {
+        initImage();
     }
 }

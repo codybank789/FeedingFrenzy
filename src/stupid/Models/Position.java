@@ -86,4 +86,12 @@ public class Position {
     public static Position RANDOM() {
         return new Position(Math.random() * GameWindow.WINDOWWIDTH, Math.random() * GameWindow.WINDOWHEIGHT);
     }
+
+    public static Position RANDOMINSIDESCREEN() {
+        return new Position(Math.random() * GameWindow.WINDOWWIDTH, Math.random() * GameWindow.WINDOWHEIGHT);
+    }
+
+    public static Position RANDOMOUTSIDESCREEN() {
+        return new Position((Math.random()-0.5) * GameWindow.WINDOWWIDTH * 2, (Math.random()-0.5) * GameWindow.WINDOWHEIGHT * 2);
+    }
 }

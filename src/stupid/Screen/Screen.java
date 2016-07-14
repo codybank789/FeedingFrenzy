@@ -1,5 +1,8 @@
 package stupid.Screen;
 
+import javafx.geometry.Pos;
+import stupid.Models.Position;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -8,15 +11,14 @@ import java.awt.event.MouseEvent;
  */
 public abstract class Screen {
     public PointerInfo mouseInfo;
-    public int mouseLocalX;
-    public int mouseLocalY;
-    public void updateMouseLocal()
-    {
+    public Position currentMousePos = new Position(0, 0);
+    public void updateMouseLocal() {
         mouseInfo = MouseInfo.getPointerInfo();
-        mouseLocalX = mouseInfo.getLocation().x;
-        mouseLocalY = mouseInfo.getLocation().y;
+        currentMousePos.setPosition(mouseInfo.getLocation().x, mouseInfo.getLocation().y);
     }
     public abstract void MouseClick(MouseEvent m);
     public abstract void update();
     public abstract void draw(Graphics g);
+    public abstract void onResume();
+    public abstract void onPause();
 }

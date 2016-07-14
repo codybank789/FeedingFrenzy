@@ -1,6 +1,7 @@
 package stupid.Models;
 
 import stupid.Interface.DisplayInterface;
+import stupid.Loader.FishLoader;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -26,6 +27,7 @@ public class GameImage{
         }
     }
     public GameImage (String path) {
+        FishLoader.loadedImages++;
         try {
             objectImage = ImageIO.read(new File(path));
         }catch (IOException e) {
@@ -77,6 +79,7 @@ public class GameImage{
     }
 
     public GameImage clone() {
+        FishLoader.loadedImages++;
         BufferedImage objectImageClone = new BufferedImage(objectImage.getWidth()
                 , objectImage.getHeight(),BufferedImage.TYPE_INT_ARGB);
         objectImageClone.getGraphics().drawImage(objectImage, 0, 0, null);

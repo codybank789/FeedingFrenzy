@@ -21,4 +21,14 @@ public class GameScreenTime extends Screen{
     public void draw(Graphics g) {
 
     }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
 }
