@@ -14,6 +14,8 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Vector;
 
 /**
  * Created by NguyenDuc on 7/13/2016.
@@ -22,8 +24,8 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
     public static final int WINDOWWIDTH = 1366;
     public static final int WINDOWHEIGHT = 768;
 
-    PlayerFish stupidFish;
-    AutoFish zombieFish;
+    Vector<GameObject> childList = new Vector<>();
+
     GameImage test;
     BufferedImage background;
     BufferedImage bufferedScreen = new BufferedImage(WINDOWWIDTH, WINDOWHEIGHT, BufferedImage.TYPE_INT_ARGB);
@@ -33,8 +35,9 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
         initWindows();
         initCursor();
 
-        stupidFish = new PlayerFish(0, 1, new Position(100, 100), this);
-        zombieFish = new AutoFish(0, 1, Position.RANDOM(), this);
+        childList.add(new PlayerFish(0, 1, new Position(100, 100), this));
+        childList.add(new AutoFish(0, 1, Position.RANDOM(), this));
+
         try {
             background = ImageIO.read(new File("res/airPlanesBackground.png"));
         }catch (IOException e) {
@@ -64,14 +67,22 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
     @Override
     public void update(Graphics g) {
         bufferedScreen.getGraphics().drawImage(background, 0, 0, null);
-        stupidFish.draw(bufferedScreen.getGraphics());
-        zombieFish.draw(bufferedScreen.getGraphics());
+        Enumeration<GameObject> child = childList.elements();
+        while (child.hasMoreElements()) {
+            child.nextElement().draw(bufferedScreen.getGraphics());
+        }
         g.drawImage(bufferedScreen, 0, 0, null);
     }
 
     void gameLoop() {
-        stupidFish.update();
-        zombieFish.update();
+        Enumeration<GameObject> child = childList.elements();
+        while (child.hasMoreElements()) {
+            child.nextElement().update();
+        }
+
+        if (childList.size() < 5) {
+            childList.add(new AutoFish(2, 1, Position.RANDOM(), this));
+        }
         repaint();
         try {
             Thread.sleep(17);
@@ -89,6 +100,6 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
 
     @Override
     public void callbackDelete(GameObject gameObject) {
-
+        childList.remove(gameObject);
     }
 }

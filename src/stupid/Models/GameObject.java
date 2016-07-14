@@ -18,6 +18,7 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
     public ObjectManagerInterface manager;
     public Vector<GameObject> childList = new Vector<>();
     public AnimationManager animationManager = new AnimationManager();
+    private boolean eaten;
 
     public GameObject() {
 
@@ -84,5 +85,4 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
         if (Math.abs(d) < 5) d = 0;
         pos.y += -Math.signum(d) * 3;
     }
-
 }

@@ -67,8 +67,6 @@ public class FishLoader {
     }
 
     public static Vector getImages(int size, int typeFish, int typeAnimation, int flip) {
-        System.out.println(size + " " + typeFish + " " + typeAnimation);
-        System.out.println(listImage[size][typeFish][typeAnimation][flip].size());
         return listImage[size][typeFish][typeAnimation][flip];
     }
 

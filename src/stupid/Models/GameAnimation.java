@@ -51,6 +51,7 @@ public class GameAnimation {
     }
 
     public void resize(int size) {
+        this.size = size;
         imageList = FishLoader.getImages(size, this.typeFish, this.typeAnimation, flip);
     }
 

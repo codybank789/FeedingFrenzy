@@ -49,6 +49,14 @@ public class AnimationManager {
         }
     }
 
+    public int getWidth() {
+        return animationList.get(0).getWidth();
+    }
+
+    public int getHeight() {
+        return animationList.get(0).getHeight();
+    }
+
     public GameAnimation getCurrentAnimation() {
         if (!(currentAnimation.isEmpty()) && currentAnimation.getFirst().time > 0) {
             nextAnimation();

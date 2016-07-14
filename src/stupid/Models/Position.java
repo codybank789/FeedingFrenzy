@@ -46,6 +46,12 @@ public class Position {
         return ((x >= aPos.x) && (y >= aPos.y) && (x <= (aPos.x + aPos.w)) && (y <= (aPos.y + aPos.h)));
     }
 
+    public boolean isCollide(Position aPos) {
+        boolean collideX = (x >= aPos.x && x <= aPos.x + aPos.w) || (aPos.x >= x && aPos.x <= x + w);
+        boolean collideY = (y >= aPos.y && y <= aPos.y + aPos.h) || (aPos.y >= y && aPos.y <= y + h);
+        return collideX && collideY;
+    }
+
     public void add(double x, double y) {
         this.x += x;
         this.y += y;
