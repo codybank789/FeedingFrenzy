@@ -13,7 +13,8 @@ import java.awt.*;
  */
 public class PlayerFish extends GameObject {
 
-    public int size = 0;
+    public int size = 1;
+    public int fishEaten = 0;
 
     public PlayerFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
@@ -26,6 +27,11 @@ public class PlayerFish extends GameObject {
         pos.direction = direction;
     }
 
+    public void update() {
+        super.update();
+
+
+    }
 
     @Override
     public void draw(Graphics g) {
