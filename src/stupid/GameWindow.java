@@ -77,6 +77,7 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
     void gameLoop() {
 //        stupidFish.update();
 //        zombieFish.update();
+        ScreenManager.getInstance().getStackScreen().peek().update();
         repaint();
         try {
             Thread.sleep(17);
@@ -85,7 +86,7 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
         }
 
         gameLoop();
-        ScreenManager.getInstance().getStackScreen().peek().update();
+
     }
 
     @Override

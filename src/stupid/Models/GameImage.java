@@ -15,7 +15,7 @@ import java.io.IOException;
  */
 public class GameImage{
 
-    BufferedImage objectImage;
+    public BufferedImage objectImage;
     int direction = 1;
 
     public GameImage (String path, int direction) {
@@ -66,6 +66,14 @@ public class GameImage{
         } else {
             draw(g, drawPosition.getCustomPosition(-xFactor, -yFactor, false));
         }
+    }
+
+    public int getWidth() {
+        return objectImage.getWidth();
+    }
+
+    public int getHeight() {
+        return objectImage.getHeight();
     }
 
     public GameImage clone() {

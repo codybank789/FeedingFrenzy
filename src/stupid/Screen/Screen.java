@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
  * Created by Yuu on 7/14/2016.
  */
 public abstract class Screen {
-    private PointerInfo mouseInfo;
+    public PointerInfo mouseInfo;
     public int mouseLocalX;
     public int mouseLocalY;
     public void updateMouseLocal()
