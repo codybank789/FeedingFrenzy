@@ -35,7 +35,9 @@ public class GameLoadingScreen extends Screen {
 
     @Override
     public void update() {
-
+        if (FishLoader.loadedImages == 1378) {
+            ScreenManager.push(new GameSceenNormal());
+        }
     }
 
     @Override
