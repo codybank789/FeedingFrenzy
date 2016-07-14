@@ -4,6 +4,7 @@ import stupid.GameWindow;
 import stupid.Interface.DisplayInterface;
 import stupid.Interface.ObjectManagerInterface;
 
+import java.awt.*;
 import java.util.*;
 
 /**
@@ -16,8 +17,7 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
 
         public ObjectManagerInterface manager;
         public Vector<GameObject> childList = new Vector<>();
-        public Vector<GameAnimation> animationList = new Vector<>();
-        public ArrayDeque<GameAnimation> currentAnimation = new ArrayDeque<>();
+        public AnimationManager animationManager = new AnimationManager();
 
     public GameObject() {
 
@@ -40,19 +40,11 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
     }
 
     public void resize(double time) {
-        Enumeration<GameAnimation> animationEnumeration = animationList.elements();
-
-        while(animationEnumeration.hasMoreElements()) {
-            animationEnumeration.nextElement().resize(time);
-        }
+        animationManager.resize(time);
     }
 
     public void flip() {
-        Enumeration<GameAnimation> animationEnumeration = animationList.elements();
-
-        while(animationEnumeration.hasMoreElements()) {
-            animationEnumeration.nextElement().flipAnimation();
-        }
+        animationManager.flip();
     }
 
     public void printPos() {
@@ -62,6 +54,35 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
     public void deleteCallback(GameObject object) {
         object.remove();
         childList.remove(object);
+    }
+
+    abstract public Position positionFeed();
+
+    @Override
+    public void update() {
+        Position pInfo = positionFeed();
+
+        int delta = (int)(pos.x - pInfo.x);
+
+        if (delta > 5) {
+            pos.x -= 3;
+            if (pos.direction == -1) {
+                flip();
+                animationManager.setAnimation(1);
+                pos.direction = 1;
+            }
+        } else if (delta < -5){
+            pos.x += 3;
+            if (pos.direction == 1) {
+                flip();
+                animationManager.setAnimation(1);
+                pos.direction = -1;
+            }
+        }
+
+        double d = pos.y - pInfo.y;
+        if (Math.abs(d) < 5) d = 0;
+        pos.y += -Math.signum(d) * 3;
     }
 
 }

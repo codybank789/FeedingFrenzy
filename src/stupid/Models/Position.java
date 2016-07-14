@@ -1,5 +1,7 @@
 package stupid.Models;
 
+import stupid.GameWindow;
+
 /**
  * Created by NguyenDuc on 7/13/2016.
  */
@@ -73,5 +75,9 @@ public class Position {
 
     public void print() {
         System.out.println(x + " " + y);
+    }
+
+    public static Position RANDOM() {
+        return new Position(Math.random() * GameWindow.WINDOWWIDTH, Math.random() * GameWindow.WINDOWHEIGHT);
     }
 }

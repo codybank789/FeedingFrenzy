@@ -33,6 +33,9 @@ public class GameImage{
         }
     }
 
+    public GameImage(BufferedImage objectImage) {
+        this.objectImage = objectImage;
+    }
 
 
     public void flipImage() {
@@ -63,7 +66,13 @@ public class GameImage{
         } else {
             draw(g, drawPosition.getCustomPosition(-xFactor, -yFactor, false));
         }
+    }
 
+    public GameImage clone() {
+        BufferedImage objectImageClone = new BufferedImage(objectImage.getWidth()
+                , objectImage.getHeight(),BufferedImage.TYPE_INT_ARGB);
+        objectImageClone.getGraphics().drawImage(objectImageClone, 0, 0, null);
+        return new GameImage(objectImageClone);
     }
 
 }

@@ -1,8 +1,8 @@
 package stupid;
 
-import stupid.GameObjects.Fish;
+import stupid.GameObjects.AutoFish;
+import stupid.GameObjects.PlayerFish;
 import stupid.Interface.ObjectManagerInterface;
-import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
 import stupid.Models.GameObject;
 import stupid.Models.Position;
@@ -22,7 +22,8 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
     public static final int WINDOWWIDTH = 1366;
     public static final int WINDOWHEIGHT = 768;
 
-    Fish stupidFish;
+    PlayerFish stupidFish;
+    AutoFish zombieFish;
     GameImage test;
     BufferedImage background;
     BufferedImage bufferedScreen = new BufferedImage(WINDOWWIDTH, WINDOWHEIGHT, BufferedImage.TYPE_INT_ARGB);
@@ -32,7 +33,8 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
         initWindows();
         initCursor();
 
-        stupidFish = new Fish(0, 1, new Position(100, 100), this);
+        stupidFish = new PlayerFish(0, 1, new Position(100, 100), this);
+        zombieFish = new AutoFish(0, 1, Position.RANDOM(), this);
         try {
             background = ImageIO.read(new File("res/airPlanesBackground.png"));
         }catch (IOException e) {
@@ -63,11 +65,13 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
     public void update(Graphics g) {
         bufferedScreen.getGraphics().drawImage(background, 0, 0, null);
         stupidFish.draw(bufferedScreen.getGraphics());
+        zombieFish.draw(bufferedScreen.getGraphics());
         g.drawImage(bufferedScreen, 0, 0, null);
     }
 
     void gameLoop() {
         stupidFish.update();
+        zombieFish.update();
         repaint();
         try {
             Thread.sleep(17);

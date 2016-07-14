@@ -13,7 +13,6 @@ import java.util.Vector;
  */
 public class GameAnimation {
 
-    AnimationAdapter animationAdapter;
     Vector<GameImage> imageList;
 
     private int count = 0;
