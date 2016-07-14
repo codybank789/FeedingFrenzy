@@ -19,8 +19,14 @@ public class GameAnimation {
     private int currentImage = 0;
     public int time = 0;
 
+    int size = 0, typeFish, typeAnimation, flip = 0;
+
     public GameAnimation(int size, int typeFish, int typeAnimation) {
-        imageList = FishLoader.getImages(size, typeFish, typeAnimation);
+        this.size = size;
+        this.typeFish = typeFish;
+        this.typeAnimation = typeAnimation;
+
+        imageList = FishLoader.getImages(size, typeFish, typeAnimation, 0);
     }
 
     public void update() {
@@ -44,20 +50,14 @@ public class GameAnimation {
         return imageList.get(1).objectImage.getHeight();
     }
 
-    public void resize(double time) {
-        Enumeration<GameImage> imageEnumeration = imageList.elements();
-
-        while(imageEnumeration.hasMoreElements()) {
-            imageEnumeration.nextElement().resizeImage(time);
-        }
+    public void resize(int size) {
+        imageList = FishLoader.getImages(size, this.typeFish, this.typeAnimation, flip);
     }
 
     public void flipAnimation() {
-        Enumeration<GameImage> imageEnumeration = imageList.elements();
+        flip = (flip+1)%2;
+        imageList = FishLoader.getImages(size, this.typeFish, this.typeAnimation, flip);
 
-        while(imageEnumeration.hasMoreElements()) {
-            imageEnumeration.nextElement().flipImage();
-        }
     }
 
     public void reset() {

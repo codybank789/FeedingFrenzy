@@ -13,11 +13,13 @@ import java.awt.*;
  */
 public class PlayerFish extends GameObject {
 
+    public int size = 0;
+
     public PlayerFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
 
         for(int i = 0; i < FishLoader.TYPEOFANIMATION; i++) {
-            animationManager.add(new GameAnimation(1, fishType, i));
+            animationManager.add(new GameAnimation(size, fishType, i));
         }
         animationManager.get(1).flipAnimation();
 

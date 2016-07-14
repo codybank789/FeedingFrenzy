@@ -16,11 +16,13 @@ public class AutoFish extends GameObject{
 
     int count = 0;
     Position lastPos;
+    public int size = 0;
+
     public AutoFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
 
         for(int i = 0; i < FishLoader.TYPEOFANIMATION; i++) {
-            animationManager.add(new GameAnimation(1, fishType, i));
+            animationManager.add(new GameAnimation(size, fishType, i));
         }
         animationManager.get(1).flipAnimation();
 
@@ -44,8 +46,6 @@ public class AutoFish extends GameObject{
             count = 0;
             lastPos = Position.RANDOM();
         }
-        System.out.println(count + "*");
-        lastPos.print();
         return lastPos;
     }
 }

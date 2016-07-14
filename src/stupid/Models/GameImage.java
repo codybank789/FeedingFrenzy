@@ -71,7 +71,7 @@ public class GameImage{
     public GameImage clone() {
         BufferedImage objectImageClone = new BufferedImage(objectImage.getWidth()
                 , objectImage.getHeight(),BufferedImage.TYPE_INT_ARGB);
-        objectImageClone.getGraphics().drawImage(objectImageClone, 0, 0, null);
+        objectImageClone.getGraphics().drawImage(objectImage, 0, 0, null);
         return new GameImage(objectImageClone);
     }
 

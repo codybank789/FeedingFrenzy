@@ -15,9 +15,9 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
 
     public Position pos;
 
-        public ObjectManagerInterface manager;
-        public Vector<GameObject> childList = new Vector<>();
-        public AnimationManager animationManager = new AnimationManager();
+    public ObjectManagerInterface manager;
+    public Vector<GameObject> childList = new Vector<>();
+    public AnimationManager animationManager = new AnimationManager();
 
     public GameObject() {
 
@@ -39,8 +39,8 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
         return(pos.isInside(new Position(0, 0, GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT)));
     }
 
-    public void resize(double time) {
-        animationManager.resize(time);
+    public void resize(int size) {
+        animationManager.resize(size);
     }
 
     public void flip() {
