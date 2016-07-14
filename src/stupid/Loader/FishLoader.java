@@ -18,22 +18,43 @@ public class FishLoader {
 
     static {
         int i=1;
-        for (int j = 0;j<TYPEOFFISH;j++) {
+        int j,k,l,m;
+        for ( j = 0;j<TYPEOFFISH;j++) {
             int numberofimg = 0;
-            for (int k = 0; k < TYPEOFANIMATION; k++) {
+            for (k = 0; k < TYPEOFANIMATION; k++) {
                 listImage[i][j][k] = new Vector<>();
 
                 int count = checkType(j+1, k+1);
-                for (int l = 0; l < count; l++) {
+                for (l = 0; l < count; l++) {
                     numberofimg++;
                     String value = String.valueOf(numberofimg);
                     int length = value.length();
-                    for (int m = 0; m < 3 - length; m++)
+                    for (m = 0; m < 3 - length; m++)
                         value = "0" + value;
                     listImage[i][j][k].add(new GameImage("res/Fish" + "/Fish" + String.valueOf(j+1) + "/" + value + ".png"));
                 }
             }
         }
+        for(j =0;j<TYPEOFFISH;j++)
+            for(k= 0;j<TYPEOFANIMATION;k++)
+            {
+                int count = checkType(j+1,k+1);
+                for(l=0;l<count;l++) {
+                    GameImage gameImage = listImage[1][j][j].get(l);
+                    gameImage.resizeImage(0.5);
+                    listImage[2][j][k].add(gameImage);
+                }
+            }
+        for(j =0;j<TYPEOFFISH;j++)
+            for(k= 0;j<TYPEOFANIMATION;k++)
+            {
+                int count = checkType(j+1,k+1);
+                for(l=0;l<count;l++) {
+                    GameImage gameImage = listImage[1][j][j].get(l);
+                    gameImage.resizeImage(2);
+                    listImage[3][j][k].add(gameImage);
+                }
+            }
     }
     public static Vector getImages(int size, int typeFish, int typeAnimation)
     {
