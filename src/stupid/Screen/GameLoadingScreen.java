@@ -56,10 +56,7 @@ public class GameLoadingScreen extends Screen {
         loadingImage.draw(g, new Position(0, 0));
 
         progressBar.updatePercentage(new Position(495, 704), (double) FishLoader.getPercentage(), g);
-        //System.out.println(FishLoader.loadedImages);
-//        g.drawRect(312,490,177,15);
-//        g.setColor(Color.YELLOW);
-//        g.fillRect(312,490,(int)(FishLoader.loadedImages/1378*177),15);
+
     }
 
     @Override

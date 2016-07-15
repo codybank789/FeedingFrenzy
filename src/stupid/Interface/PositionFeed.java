@@ -96,7 +96,6 @@ public abstract class PositionFeed {
             } else {
                 count = 0;
             }
-
             return lastPos;
         }
     };

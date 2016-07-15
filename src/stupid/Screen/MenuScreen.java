@@ -5,13 +5,14 @@ import stupid.Interface.ScreenListener;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
 import stupid.Models.Position;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by Yuu on 7/14/2016.
@@ -23,17 +24,12 @@ public class MenuScreen extends Screen {
     private static GameImage optionNewGame = new GameImage("res/image 684.png");
     private static GameImage optionNewGameClick = new GameImage("res/image 686.png");
     private static GameImage helpButton = new GameImage("res/help.png");
-    //    private BufferedImage optionExit;
-//    private BufferedImage optionExitClick;
+
     private static GameImage optionTime = new GameImage("res/image 695.png");
     private static GameImage optionTimeClick = new GameImage("res/image 697.png");
     private static GameImage optionnew = new GameImage("res/image 881.jpg");
     private static GameImage optiontime = new GameImage("res/image 881.jpg");
 
-    private static final int OPTIONNEWGAMEX = 200;
-    private static final int OPTIONNEWGAMEY = 400;
-    private static final int OPTIONTIMEX = 400;
-    private static final int OPTTIONTIMEY = 400;
     public static final Position OPTIONGAME_POSITION = new Position(GameWindow.WINDOWWIDTH*4/5,GameWindow.WINDOWHEIGHT*3/6
             , optionNewGame.getWidth(), optionNewGame.getHeight());
     public static final Position OPTIONTIME_POSITION = new Position(GameWindow.WINDOWWIDTH*4/5,GameWindow.WINDOWHEIGHT*4/6
@@ -41,8 +37,7 @@ public class MenuScreen extends Screen {
     public static final Position HELP_POSTION = new Position(GameWindow.WINDOWWIDTH*4/5+40,GameWindow.WINDOWHEIGHT*5/6,
             helpButton.getWidth(),helpButton.getHeight());
 
-    //    private static final int optionExitPosX =400;
-//    private static final int optionExitPosY = 600;
+
     public MenuScreen() {
         optionnew = optionNewGame;
         optiontime = optionTime;
@@ -60,7 +55,6 @@ public class MenuScreen extends Screen {
                         gameLoadingScreen.addScreenListener(new ScreenListener() {
                             @Override
                             public void onChildScreenFinish() {
-                                //ScreenManager.pop();
                             }
                         });
                         ScreenManager.push(gameLoadingScreen);
@@ -73,7 +67,6 @@ public class MenuScreen extends Screen {
                 }
 
                 if (currentMousePos.isInside(OPTIONTIME_POSITION)) {
-                    //ScreenManager.push(new GameScreenTime());
                 }
                 if(currentMousePos.isInside(HELP_POSTION))
                 {

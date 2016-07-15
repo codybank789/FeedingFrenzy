@@ -29,10 +29,11 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     public static GameImage background = new GameImage("res/image 672.jpg").resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
 
     public GameSceenNormal() {
-
+        pearl= new Pearl();
+        childList.add(pearl);
         playerFish = new PlayerFish(0, 1, Position.RANDOMINSIDESCREEN(), this);
         childList.add(playerFish);
-//        pearl= new Pearl();
+
     }
 
     @Override
@@ -73,7 +74,6 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         while (all.hasMoreElements()) {
             all.nextElement().draw(g);
         }
-//        ;pearl.draw(g)
     }
 
     @Override
