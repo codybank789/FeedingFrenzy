@@ -44,13 +44,20 @@ public class PlayerFish extends GameObject {
             GameObject current = all.nextElement();
 
             if (current != this) {
-                if (mounthPos.isCollide(current.pos) && size >= current.size) {
-                    current.remove();
-                    fishEaten++;
+                if (current instanceof AutoFish) {
+                    if (mounthPos.isCollide(current.pos) && size >= current.size) {
+                        current.remove();
+                        fishEaten++;
+                    }
+                } else if (current instanceof IncreaseSizeItem) {
+                    if (mounthPos.isCollide(current.pos)) {
+                        current.remove();
+                        fishEaten+=3;
+                    }
                 }
             }
         }
-
+        //System.out.println(fishEaten);
 
         if (fishEaten > 2) {
             if (size < 2)

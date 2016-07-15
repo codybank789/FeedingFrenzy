@@ -1,6 +1,7 @@
 package stupid.Screen;
 
 import stupid.GameWindow;
+import stupid.Interface.ScreenListener;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
 import stupid.Models.Position;
@@ -35,7 +36,17 @@ public class GameLoadingScreen extends Screen {
     @Override
     public void update() {
         if (FishLoader.isDone()) {
-            ScreenManager.push(new GameSceenNormal());
+            GameSceenNormal gameSceenNormal = new GameSceenNormal();
+            gameSceenNormal.addScreenListener(new ScreenListener() {
+                @Override
+                public void onChildScreenFinish() {
+                    ScreenManager.pop();
+                    if (screenListener != null) {
+                        screenListener.onChildScreenFinish();
+                    }
+                }
+            });
+            ScreenManager.push(gameSceenNormal);
         }
         updateMouseLocal();
     }

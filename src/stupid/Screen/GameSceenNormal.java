@@ -1,10 +1,12 @@
 package stupid.Screen;
 
 import stupid.GameObjects.AutoFish;
+import stupid.GameObjects.IncreaseSizeItem;
 import stupid.GameObjects.Pearl;
 import stupid.GameObjects.PlayerFish;
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
+import stupid.Interface.ScreenListener;
 import stupid.Models.GameImage;
 import stupid.Models.GameObject;
 import stupid.Models.Position;
@@ -39,8 +41,13 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     public void update() {
         if (childList.size() < 6) {
             AutoFish newFish = new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this);
-            newFish.resize((int)(Math.random()*1000)%3);
+            newFish.resize((int)(Math.random()*1000)%2);
             childList.add(newFish);
+        }
+
+        if ((int)(Math.random()*1000)%300 == 0) {
+            //System.out.println("added");
+            childList.add(new IncreaseSizeItem(this));
         }
 
         Enumeration<GameObject> all = childList.elements();
@@ -53,6 +60,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     @Override
     public void draw(Graphics g) {
         background.draw(g, new Position(0, 0));
+
         Enumeration<GameObject> all = childList.elements();
         while (all.hasMoreElements()) {
             all.nextElement().draw(g);
@@ -76,7 +84,16 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     public void callbackDelete(GameObject gameObject) {
         childList.remove(gameObject);
         if (gameObject instanceof PlayerFish) {
-            ScreenManager.push(new GameOverScreen());
+            GameOverScreen gameOverScreen = new GameOverScreen();
+            gameOverScreen.addScreenListener(new ScreenListener() {
+                @Override
+                public void onChildScreenFinish() {
+                    ScreenManager.pop();
+                    if (screenListener != null)
+                        screenListener.onChildScreenFinish();
+                }
+            });
+            ScreenManager.push(gameOverScreen);
         }
 
     }

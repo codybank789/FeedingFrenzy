@@ -1,5 +1,6 @@
 package stupid.Screen;
 
+import stupid.Interface.ScreenListener;
 import stupid.Models.GameImage;
 import stupid.Models.Position;
 
@@ -27,6 +28,8 @@ public class GameOverScreen extends Screen {
     private int count ;
 
 
+
+
     public GameOverScreen()
     {
 
@@ -37,8 +40,8 @@ public class GameOverScreen extends Screen {
         if (m.getButton() == 1){
             if(currentMousePos.isInside(BACKBUTTON))
             {
-                ScreenManager.pop();
-                ScreenManager.pop();
+                if (screenListener != null)
+                    screenListener.onChildScreenFinish();
                 ScreenManager.pop();
             }
         }

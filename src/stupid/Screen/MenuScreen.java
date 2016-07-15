@@ -1,5 +1,6 @@
 package stupid.Screen;
 
+import stupid.Interface.ScreenListener;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
 import stupid.Models.Position;
@@ -55,7 +56,15 @@ public class MenuScreen extends Screen {
                 if (currentMousePos.isInside(OPTIONGAME_POSITION)) {
                     if (isInit == false) {
                         isInit = true;
-                        ScreenManager.push(new GameLoadingScreen());
+
+                        GameLoadingScreen gameLoadingScreen = new GameLoadingScreen();
+                        gameLoadingScreen.addScreenListener(new ScreenListener() {
+                            @Override
+                            public void onChildScreenFinish() {
+                                //ScreenManager.pop();
+                            }
+                        });
+                        ScreenManager.push(gameLoadingScreen);
                         Thread thread = new Thread(new FishLoader());
                         thread.start();
                     } else {
