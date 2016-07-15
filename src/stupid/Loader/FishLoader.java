@@ -71,6 +71,8 @@ public class FishLoader implements Runnable{
                     }
                 }
         }
+
+        System.out.println(loadedImages + "ádfasdf");
     }
 
     public static Vector getImages(int size, int typeFish, int typeAnimation, int flip) {
@@ -235,10 +237,10 @@ public class FishLoader implements Runnable{
     }
 
     public static double getPercentage() {
-        return (double) loadedImages/1377;
+        return (double) loadedImages/1378;
     }
 
     public static boolean isDone() {
-        return  loadedImages == 1377;
+        return  loadedImages == 1378;
     }
 }
