@@ -11,7 +11,7 @@ import java.util.Vector;
  */
 public class FishLoader implements Runnable{
     public static int loadedImages = 0;
-    public static final double[] FISHSIZE = {0.8, 1, 1.25};
+    public static final double[] FISHSIZE = {0.5, 1, 1.4, 0};
     public static final int SIZEOFFISH = 3;
     public static final int TYPEOFFISH = 11;
     public static final int TYPEOFANIMATION = 3;

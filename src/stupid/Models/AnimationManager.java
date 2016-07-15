@@ -10,6 +10,7 @@ import java.util.Vector;
  * Created by NguyenDuc on 7/14/2016.
  */
 public class AnimationManager {
+    public AnimationListener animationListener;
     public boolean isLocked = false;
     public int toSize = 0;
     public Vector<GameAnimation> animationList = new Vector<>();
