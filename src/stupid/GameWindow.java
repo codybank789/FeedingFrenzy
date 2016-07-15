@@ -32,12 +32,6 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
 
     public GameWindow() {
         initWindows();
-
-        try {
-            background = ImageIO.read(new File("res/airPlanesBackground.png"));
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void hideCursor() {

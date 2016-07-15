@@ -21,7 +21,6 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
     private boolean eaten;
 
     public GameObject() {
-
         }
 
     public GameObject(int direction, Position initialPos, ObjectManagerInterface manager) {

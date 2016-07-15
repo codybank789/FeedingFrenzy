@@ -1,12 +1,15 @@
 package stupid.Screen;
 
+import stupid.Interface.ObjectManagerInterface;
+import stupid.Models.GameObject;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
 /**
  * Created by Yuu on 7/14/2016.
  */
-public class GameScreenTime extends Screen{
+public class GameScreenTime extends Screen implements ObjectManagerInterface{
     @Override
     public void MouseClick(MouseEvent m) {
 
@@ -29,6 +32,11 @@ public class GameScreenTime extends Screen{
 
     @Override
     public void onPause() {
+
+    }
+
+    @Override
+    public void callbackDelete(GameObject gameObject) {
 
     }
 }

@@ -1,6 +1,7 @@
 package stupid.Screen;
 
 import stupid.GameObjects.AutoFish;
+import stupid.GameObjects.Pearl;
 import stupid.GameObjects.PlayerFish;
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
@@ -21,12 +22,13 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
 
     Vector<GameObject> childList = new Vector<>();
     PlayerFish playerFish;
+    Pearl pearl;
     public static GameImage background = new GameImage("res/image 672.jpg");
 
     public GameSceenNormal() {
 
-        System.out.println("ok");
         playerFish = new PlayerFish(0, 1, Position.RANDOMINSIDESCREEN(), this);
+//        pearl= new Pearl();
     }
 
     @Override
@@ -54,6 +56,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
             all.nextElement().draw(g);
         }
         playerFish.draw(g);
+//        ;pearl.draw(g)
     }
 
     @Override

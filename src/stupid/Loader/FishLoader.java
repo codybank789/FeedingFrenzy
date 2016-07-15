@@ -187,10 +187,10 @@ public class FishLoader implements Runnable{
             case 9:
                 switch (k) {
                     case 1:
-                        check = 2;
+                        check = 1;
                         break;
                     case 2:
-                        check = 2;
+                        check = 3;
                         break;
                     case 3:
                         check = 1;

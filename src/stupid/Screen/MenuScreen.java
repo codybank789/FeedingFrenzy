@@ -78,7 +78,7 @@ public class MenuScreen extends Screen {
         }
 
         if (currentMousePos.isInside(OPTIONTIME_POSITION)) {
-            optiontime = optionNewGameClick;
+            optiontime = optionTimeClick;
         } else {
             optiontime = optionTime;
         }
