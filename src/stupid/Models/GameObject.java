@@ -106,6 +106,7 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
 
     @Override
     public void draw(Graphics g) {
+        g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
         g.drawString(String.valueOf(size), (int)pos.x, (int)pos.y);
         g.drawRect((int)pos.x, (int)pos.y, (int)pos.w, (int)pos.h);
     }
