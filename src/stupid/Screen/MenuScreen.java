@@ -34,13 +34,11 @@ public class MenuScreen extends Screen {
     private static final int OPTIONNEWGAMEY = 400;
     private static final int OPTIONTIMEX = 400;
     private static final int OPTTIONTIMEY = 400;
-    private static final int HELPX = 600;
-    private static final int HELPY= 450;
-    public static final Position OPTIONGAME_POSITION = new Position(200, 400
+    public static final Position OPTIONGAME_POSITION = new Position(GameWindow.WINDOWWIDTH*4/5,GameWindow.WINDOWHEIGHT*3/6
             , optionNewGame.getWidth(), optionNewGame.getHeight());
-    public static final Position OPTIONTIME_POSITION = new Position(400, 400
+    public static final Position OPTIONTIME_POSITION = new Position(GameWindow.WINDOWWIDTH*4/5,GameWindow.WINDOWHEIGHT*4/6
             , optionTime.getWidth(), optionTime.getHeight());
-    public static final Position HELP_POSTION = new Position(600,450,
+    public static final Position HELP_POSTION = new Position(GameWindow.WINDOWWIDTH*4/5+40,GameWindow.WINDOWHEIGHT*5/6,
             helpButton.getWidth(),helpButton.getHeight());
 
     //    private static final int optionExitPosX =400;
@@ -119,9 +117,9 @@ public class MenuScreen extends Screen {
     public void draw(Graphics g) {
         g.drawImage(backGround.objectImage, 0, 0, null);
         g.drawImage(title.objectImage, 100, 100, null);
-        g.drawImage(optionnew.objectImage, OPTIONNEWGAMEX, OPTIONNEWGAMEY, null);
-        g.drawImage(optiontime.objectImage, OPTIONTIMEX, OPTTIONTIMEY, null);
-        g.drawImage(helpButton.objectImage, HELPX,HELPY,null);
+        optionnew.draw(g,OPTIONGAME_POSITION);
+        optiontime.draw(g,OPTIONTIME_POSITION);
+        helpButton.draw(g,HELP_POSTION);
     }
 
     @Override

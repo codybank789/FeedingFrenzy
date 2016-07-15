@@ -1,5 +1,6 @@
 package stupid.Screen;
 
+import stupid.GameWindow;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
 import stupid.Models.Position;
@@ -12,10 +13,10 @@ import java.awt.event.MouseEvent;
  */
 public class HelpScreen extends Screen {
 
-    public static GameImage background = new GameImage("res/helpbackground.jpg");
+    public static GameImage background = new GameImage("res/helpbackground.jpg").resizeImage(GameWindow.WINDOWWIDTH,GameWindow.WINDOWHEIGHT);
     private static final String BACK_RS = "res/backbutton.png";
     private static GameImage backButton = new GameImage(BACK_RS);
-    private static final Position BACKBUTTON= new Position(350,450,backButton.getWidth(),backButton.getHeight());
+    private static final Position BACKBUTTON= new Position(GameWindow.WINDOWWIDTH/2,GameWindow.WINDOWHEIGHT*5/6,backButton.getWidth(),backButton.getHeight());
 
 
 

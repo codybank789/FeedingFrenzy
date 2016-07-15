@@ -85,7 +85,7 @@ public abstract class PositionFeed {
             playerFish = GameObject.playerFish;
 
             count++;
-            if (count <= 360 || lastPos == null) {
+            if (count <= 3600 || lastPos == null) {
                 lastPos = playerFish.pos;
             } else if (count <= 1200){
                 count1++;

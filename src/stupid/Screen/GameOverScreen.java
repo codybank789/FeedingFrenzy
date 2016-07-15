@@ -25,7 +25,7 @@ public class GameOverScreen extends Screen {
     private static GameImage  rImage= new GameImage(R_RS);
     private static GameImage yImage= new GameImage(Y_RS);
     private static GameImage backButton = new GameImage(BACK_RS);;
-    private static final Position BACKBUTTON= new Position(400,400,backButton.getWidth(),backButton.getHeight());
+    private static final Position BACKBUTTON= new Position(600,400,backButton.getWidth(),backButton.getHeight());
     private int count ;
 
 
@@ -59,11 +59,11 @@ public class GameOverScreen extends Screen {
     @Override
     public void draw(Graphics g) {
         backGround.draw(g,new Position(0,0));
-        if(count>=60) sImage.draw(g,new Position(200,300));
-        if (count>=120) oImage.draw(g,new Position(250,300));
-        if (count>=180) rImage.draw(g,new Position(300,300));
-        if (count>=240) rImage.draw(g,new Position(350,300));
-        if (count==300) yImage.draw(g,new Position(400,300));
+        if(count>=60) sImage.draw(g,new Position(500,300));
+        if (count>=120) oImage.draw(g,new Position(550,300));
+        if (count>=180) rImage.draw(g,new Position(600,300));
+        if (count>=240) rImage.draw(g,new Position(650,300));
+        if (count==300) yImage.draw(g,new Position(700,300));
         if(count==300) backButton.draw(g,BACKBUTTON);
     }
 

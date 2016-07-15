@@ -24,7 +24,7 @@ public class GameLoadingScreen extends Screen {
 
     public GameLoadingScreen()
     {
-        progressBar = new ProgressBar(222, 22);
+        progressBar = new ProgressBar(378, 25);
         loadingImage = new GameImage(LOADINGIMG_RS);
         loadingImage.resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);
     }
@@ -49,6 +49,7 @@ public class GameLoadingScreen extends Screen {
             ScreenManager.push(gameSceenNormal);
         }
         updateMouseLocal();
+        System.out.println(currentMousePos);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class GameLoadingScreen extends Screen {
         loadingImage.draw(g, new Position(0, 0));
         System.out.println(MouseInfo.getPointerInfo().getLocation().x+ " " + MouseInfo.getPointerInfo().getLocation().y);
 
-        progressBar.updatePercentage(new Position(290, 550), (double) FishLoader.getPercentage(), g);
+        progressBar.updatePercentage(new Position(495, 704), (double) FishLoader.getPercentage(), g);
         //System.out.println(FishLoader.loadedImages);
 //        g.drawRect(312,490,177,15);
 //        g.setColor(Color.YELLOW);
