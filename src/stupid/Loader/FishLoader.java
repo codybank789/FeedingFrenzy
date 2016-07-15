@@ -11,6 +11,7 @@ import java.util.Vector;
  */
 public class FishLoader implements Runnable{
     public static int loadedImages = 0;
+    public static final double[] FISHSIZE = {0.5, 1, 1.5};
     public static final int SIZEOFFISH = 3;
     public static final int TYPEOFFISH = 11;
     public static final int TYPEOFANIMATION = 3;
@@ -51,7 +52,7 @@ public class FishLoader implements Runnable{
                         int count = checkType(j + 1, k + 1);
                         for (l = 0; l < count; l++) {
                             GameImage gameImage = listImage[1][j][k][0].get(l).clone();
-                            gameImage.resizeImage(0.5 * (i + 1));
+                            gameImage.resizeImage(FISHSIZE[i]);
                             listImage[i][j][k][0].add(gameImage);
                         }
                     }
@@ -70,8 +71,6 @@ public class FishLoader implements Runnable{
                     }
                 }
         }
-
-        System.out.println(loadedImages + "fasfdasf");
     }
 
     public static Vector getImages(int size, int typeFish, int typeAnimation, int flip) {
@@ -233,5 +232,13 @@ public class FishLoader implements Runnable{
     @Override
     public void run() {
         initImage();
+    }
+
+    public static double getPercentage() {
+        return (double) loadedImages/1377;
+    }
+
+    public static boolean isDone() {
+        return  loadedImages == 1377;
     }
 }

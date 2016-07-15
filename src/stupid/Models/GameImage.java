@@ -46,17 +46,28 @@ public class GameImage{
         AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
         objectImage = op.filter(objectImage, null);
     }
-    public void resizeImage(double time) {
-        int newHeight = (int)(objectImage.getHeight()*time);
-        int newWidth = (int)(objectImage.getWidth()*time);
+
+    public void resizeImage(int newWidth, int newHeight) {
         Image tmp = objectImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         BufferedImage newPlaneImage = new BufferedImage(newWidth, newHeight,BufferedImage.TYPE_INT_ARGB);
         newPlaneImage.getGraphics().drawImage(tmp,0,0,null);
         objectImage = newPlaneImage;
     }
 
+    public void resizeImage(double time) {
+        int newHeight = (int)(objectImage.getHeight()*time);
+        int newWidth = (int)(objectImage.getWidth()*time);
+        resizeImage(newWidth, newHeight);
+    }
+
     public void draw(Graphics g, Position drawPosition) {
-        g.drawImage(objectImage, (int)drawPosition.x, (int)drawPosition.y, null);
+        if (drawPosition.w == -1) {
+            g.drawImage(objectImage, (int)drawPosition.x, (int)drawPosition.y, null);
+        } else {
+            g.drawImage(objectImage, (int)drawPosition.x, (int)drawPosition.y
+                    , (int)drawPosition.w, (int)drawPosition.h, null);
+        }
+
     }
     public void customDraw(Graphics g, Position drawPosition, double xFactor, double yFactor, boolean dirAware) {
         if (dirAware) {

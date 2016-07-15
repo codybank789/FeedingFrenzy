@@ -85,4 +85,9 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
         if (Math.abs(d) < 5) d = 0;
         pos.y += -Math.signum(d) * 3;
     }
+
+    @Override
+    public void draw(Graphics g) {
+        g.drawRect((int)pos.x, (int)pos.y, (int)pos.w, (int)pos.h);
+    }
 }

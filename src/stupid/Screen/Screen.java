@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
  * Created by Yuu on 7/14/2016.
  */
 public abstract class Screen {
-    public PointerInfo mouseInfo;
+    public PointerInfo mouseInfo = MouseInfo.getPointerInfo();
     public Position currentMousePos = new Position(0, 0);
     public void updateMouseLocal() {
         mouseInfo = MouseInfo.getPointerInfo();

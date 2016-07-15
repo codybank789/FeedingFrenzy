@@ -14,8 +14,9 @@ import java.util.Enumeration;
  */
 public class PlayerFish extends GameObject {
 
-    public int size = 1;
+    public int size = 0;
     public int fishEaten = 0;
+    PointerInfo pInfo = MouseInfo.getPointerInfo();
 
     public PlayerFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
@@ -28,19 +29,23 @@ public class PlayerFish extends GameObject {
         pos.direction = direction;
         pos.w = animationManager.getWidth();
         pos.h = animationManager.getHeight();
-
     }
 
     public void update() {
         super.update();
 
+        int delta = (int)pos.w;
+        if (pos.direction == 1) {
+            delta = 0;
+        }
+        Position mounthPos = pos.getCustomBox(1, 0.3, 0.3, 0.4, true);
 
         Enumeration<GameObject> all = allObjects.elements();
         while (all.hasMoreElements()) {
             GameObject current = all.nextElement();
 
             if (current instanceof AutoFish) {
-                if (pos.isCollide(current.pos) && size > ((AutoFish) current).size) {
+                if (mounthPos.isCollide(current.pos) && size >= ((AutoFish) current).size) {
                     current.remove();
                     fishEaten++;
                 }
@@ -62,6 +67,9 @@ public class PlayerFish extends GameObject {
 
     @Override
     public void draw(Graphics g) {
+        //super.draw(g);
+        Position mounthPos = pos.getCustomBox(1, 0.3, 0.3, 0.4, true);
+        g.drawRect((int)mounthPos.x, (int)mounthPos.y, (int)mounthPos.w, (int)mounthPos.h);
         animationManager.getCurrentAnimation().draw(g, pos);
     }
 
@@ -72,7 +80,7 @@ public class PlayerFish extends GameObject {
 
     @Override
     public Position positionFeed() {
-        PointerInfo pInfo = MouseInfo.getPointerInfo();
+        pInfo = MouseInfo.getPointerInfo();
         return new Position(pInfo.getLocation().x, pInfo.getLocation().y);
     }
 }

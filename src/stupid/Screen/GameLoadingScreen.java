@@ -1,5 +1,6 @@
 package stupid.Screen;
 
+import stupid.GameWindow;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
 import stupid.Models.Position;
@@ -16,17 +17,15 @@ import java.io.IOException;
  * Created by Yuu on 7/14/2016.
  */
 public class GameLoadingScreen extends Screen {
-    private GameImage backGround;
-    private static final String BACKGROUND_RS ="res/image 881.jpg";
     private GameImage loadingImage;
     private static final String LOADINGIMG_RS = "res/image 886.png";
     private ProgressBar progressBar ;
 
     public GameLoadingScreen()
     {
-        progressBar = new ProgressBar(177, 15);
-        backGround = new GameImage(BACKGROUND_RS);
+        progressBar = new ProgressBar(222, 22);
         loadingImage = new GameImage(LOADINGIMG_RS);
+        loadingImage.resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);
     }
     @Override
     public void MouseClick(MouseEvent m) {
@@ -35,7 +34,7 @@ public class GameLoadingScreen extends Screen {
 
     @Override
     public void update() {
-        if (FishLoader.loadedImages == 1378) {
+        if (FishLoader.isDone()) {
             ScreenManager.push(new GameSceenNormal());
         }
         updateMouseLocal();
@@ -43,10 +42,11 @@ public class GameLoadingScreen extends Screen {
 
     @Override
     public void draw(Graphics g) {
-        backGround.draw(g, new Position(0, 0));
-        loadingImage.draw(g, new Position(80, 50));
+        loadingImage.draw(g, new Position(0, 0));
+        System.out.println(MouseInfo.getPointerInfo().getLocation().x+ " " + MouseInfo.getPointerInfo().getLocation().y);
 
-        progressBar.updatePercentage(new Position(312, 490), (double) FishLoader.loadedImages/1378, g);
+        progressBar.updatePercentage(new Position(290, 550), (double) FishLoader.getPercentage(), g);
+        //System.out.println(FishLoader.loadedImages);
 //        g.drawRect(312,490,177,15);
 //        g.setColor(Color.YELLOW);
 //        g.fillRect(312,490,(int)(FishLoader.loadedImages/1378*177),15);

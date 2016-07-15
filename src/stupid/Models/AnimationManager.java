@@ -8,6 +8,7 @@ import java.util.Vector;
  * Created by NguyenDuc on 7/14/2016.
  */
 public class AnimationManager {
+    public boolean isLocked = false;
     public Vector<GameAnimation> animationList = new Vector<>();
     public ArrayDeque<GameAnimation> currentAnimation = new ArrayDeque<>();
 
@@ -22,6 +23,8 @@ public class AnimationManager {
     }
 
     public void setAnimation(int pos) {
+        if (isLocked) return;
+
         while (currentAnimation.size() > 0) {
             currentAnimation.removeFirst().reset();
         }
@@ -29,11 +32,18 @@ public class AnimationManager {
     }
 
     public void nextAnimation() {
+        if (isLocked) return;
+
         currentAnimation.getFirst().reset();
         currentAnimation.removeFirst();
     }
 
     public void resize(int size) {
+        isLocked = true;
+        setAnimation(0);
+        getCurrentAnimation().setResize(size);
+        isLocked = false;
+
         Enumeration<GameAnimation> animationEnumeration = animationList.elements();
 
         while(animationEnumeration.hasMoreElements()) {

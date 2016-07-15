@@ -27,10 +27,13 @@ public class AutoFish extends GameObject{
         animationManager.get(1).flipAnimation();
 
         pos.direction = direction;
+        pos.w = animationManager.getWidth();
+        pos.h = animationManager.getHeight();
     }
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         animationManager.getCurrentAnimation().draw(g, pos);
     }
 

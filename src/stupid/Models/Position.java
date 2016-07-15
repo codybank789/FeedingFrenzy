@@ -1,5 +1,6 @@
 package stupid.Models;
 
+import javafx.geometry.Pos;
 import stupid.GameWindow;
 
 /**
@@ -19,7 +20,7 @@ public class Position {
     }
 
     public Position(double x, double y) {
-        this(x, y, 0, 0);
+        this(x, y, -1, -1);
     }
 
     public void setPosition(double x, double y) {
@@ -29,17 +30,30 @@ public class Position {
 
     public Position getCustomPosition(double xFactor, double yFactor, boolean dirAware) {
         if (dirAware) {
-            if (direction == 1) {
+            if (direction == -1) {
                 return(new Position(x + w * xFactor
                         , y + h * yFactor, w, h));
             } else {
-                return(new Position(x + w * xFactor
-                        , y + h * (1-yFactor), w, h));
+                return(new Position(x + w * (1-xFactor)
+                        , y + h * yFactor, w, h));
             }
         }
 
         return(new Position(x + w * xFactor
                 , y + h * yFactor, w, h));
+    }
+
+    public Position getCustomBox(double xFactor, double yFactor, double wFactor, double hFactor, boolean dirAware) {
+        Position point = getCustomPosition(xFactor, yFactor, dirAware);
+        if (dirAware) {
+            if (direction == 1) {
+                return new Position(point.x, point.y, w*wFactor, h*hFactor);
+            } else {
+                return new Position(point.x-w*wFactor, point.y, w*wFactor, h*hFactor);
+            }
+        } else {
+            return new Position(point.x, point.y, w*wFactor, h*hFactor);
+        }
     }
 
     public boolean isInside(Position aPos) {
