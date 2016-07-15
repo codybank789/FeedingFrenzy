@@ -48,13 +48,13 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         }
 
         if (childList.size() < 2) {
-            AutoFish newFish = new AutoFish(5, 1, Position.RANDOMOUTSIDESCREEN(), this);
-            newFish.resize(2);
-            newFish.setPositionFeed(PositionFeed.moveToPlayer);
-            childList.add(newFish);
+            //AutoFish newFish = new AutoFish(5, 1, Position.RANDOMOUTSIDESCREEN(), this);
+            //newFish.resize(2);
+            //newFish.setPositionFeed(PositionFeed.moveToPlayer);
+            //childList.add(newFish);
         }
 
-        if ((int)(Math.random()*1000)%300 == 0) {
+        if ((int)(Math.random()*1000)%100 == 0) {
             //System.out.println("added");
             childList.add(new IncreaseSizeItem(this));
         }

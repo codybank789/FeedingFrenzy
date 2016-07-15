@@ -49,13 +49,11 @@ public class GameLoadingScreen extends Screen {
             ScreenManager.push(gameSceenNormal);
         }
         updateMouseLocal();
-        System.out.println(currentMousePos);
     }
 
     @Override
     public void draw(Graphics g) {
         loadingImage.draw(g, new Position(0, 0));
-        System.out.println(MouseInfo.getPointerInfo().getLocation().x+ " " + MouseInfo.getPointerInfo().getLocation().y);
 
         progressBar.updatePercentage(new Position(495, 704), (double) FishLoader.getPercentage(), g);
         //System.out.println(FishLoader.loadedImages);

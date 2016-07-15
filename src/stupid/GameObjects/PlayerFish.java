@@ -60,7 +60,6 @@ public class PlayerFish extends GameObject {
                 }
             }
         }
-        //System.out.println(fishEaten);
 
         if (fishEaten > 2) {
             if (size < 2)
