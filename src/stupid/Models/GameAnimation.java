@@ -52,7 +52,8 @@ public class GameAnimation {
     public void draw(Graphics g, Position drawPosition) {
         update();
         if (isResizing) {
-            double xFactor = (double)currentImage/imageList.size()/4 + 1;
+            double factor = FishLoader.FISHSIZE[toSize] / FishLoader.FISHSIZE[size] - 1;
+            double xFactor = (double)currentImage/imageList.size() * factor + 1;
             Position newPos = drawPosition.getCustomBox(0, 0, xFactor, xFactor, false);
             imageList.get(currentImage).draw(g, newPos);
         } else {

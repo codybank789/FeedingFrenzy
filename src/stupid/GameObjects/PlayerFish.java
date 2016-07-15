@@ -20,6 +20,7 @@ public class PlayerFish extends GameObject {
 
     public PlayerFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
+        speed = 5;
 
         for (int i = 0; i < FishLoader.TYPEOFANIMATION; i++) {
             animationManager.add(new GameAnimation(size, fishType, i));

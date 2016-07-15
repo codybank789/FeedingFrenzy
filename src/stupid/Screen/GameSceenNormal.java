@@ -43,9 +43,9 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     @Override
     public void update() {
         if (childList.size() < 6) {
-            //AutoFish newFish = new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this);
+            AutoFish newFish = new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this);
             //newFish.resize((int)(Math.random()*1000)%2);
-            //childList.add(newFish);
+            childList.add(newFish);
         }
 
         if (childList.size() < 2) {

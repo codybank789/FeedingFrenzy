@@ -17,7 +17,7 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
 
     public static PlayerFish playerFish;
 
-
+    public int speed = 3;
     public PositionFeed positionFeed;
     public Position pos;
     public int size=0;
@@ -87,14 +87,14 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
         int delta = (int) (pos.x - pInfo.x);
 
         if (delta > 5) {
-            pos.x -= 3;
+            pos.x -= speed;
             if (pos.direction == -1) {
                 flip();
                 animationManager.setAnimation(1);
                 pos.direction = 1;
             }
         } else if (delta < -5) {
-            pos.x += 3;
+            pos.x += speed;
             if (pos.direction == 1) {
                 flip();
                 animationManager.setAnimation(1);
@@ -104,7 +104,7 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
 
         double d = pos.y - pInfo.y;
         if (Math.abs(d) < 5) d = 0;
-        pos.y += -Math.signum(d) * 3;
+        pos.y += -Math.signum(d) * speed;
     }
 
     @Override
