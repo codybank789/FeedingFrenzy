@@ -14,14 +14,13 @@ import java.util.Enumeration;
  */
 public class PlayerFish extends GameObject {
 
-    public int size = 0;
     public int fishEaten = 0;
     PointerInfo pInfo = MouseInfo.getPointerInfo();
 
     public PlayerFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
 
-        for(int i = 0; i < FishLoader.TYPEOFANIMATION; i++) {
+        for (int i = 0; i < FishLoader.TYPEOFANIMATION; i++) {
             animationManager.add(new GameAnimation(size, fishType, i));
         }
         animationManager.get(1).flipAnimation();
@@ -34,7 +33,7 @@ public class PlayerFish extends GameObject {
     public void update() {
         super.update();
 
-        int delta = (int)pos.w;
+        int delta = (int) pos.w;
         if (pos.direction == 1) {
             delta = 0;
         }
@@ -44,32 +43,28 @@ public class PlayerFish extends GameObject {
         while (all.hasMoreElements()) {
             GameObject current = all.nextElement();
 
-            if (current instanceof AutoFish) {
-                if (mounthPos.isCollide(current.pos) && size >= ((AutoFish) current).size) {
+            if (current != this) {
+                if (mounthPos.isCollide(current.pos) && size >= current.size) {
                     current.remove();
                     fishEaten++;
                 }
             }
         }
 
+
         if (fishEaten > 2) {
             if (size < 2)
-                animationManager.resize(++size);
+                resize(++size);
             fishEaten = 0;
         }
-    }
 
-    public void resize(int size) {
-        animationManager.resize(++size);
-        pos.w = animationManager.getWidth();
-        pos.h = animationManager.getHeight();
     }
 
     @Override
     public void draw(Graphics g) {
-        //super.draw(g);
+        super.draw(g);
         Position mounthPos = pos.getCustomBox(1, 0.3, 0.3, 0.4, true);
-        g.drawRect((int)mounthPos.x, (int)mounthPos.y, (int)mounthPos.w, (int)mounthPos.h);
+        g.drawRect((int) mounthPos.x, (int) mounthPos.y, (int) mounthPos.w, (int) mounthPos.h);
         animationManager.getCurrentAnimation().draw(g, pos);
     }
 

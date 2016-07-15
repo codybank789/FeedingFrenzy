@@ -71,16 +71,15 @@ public class GameWindow extends Frame implements Runnable, ObjectManagerInterfac
     }
 
     void gameLoop() {
-        ScreenManager.getInstance().getStackScreen().peek().update();
-        repaint();
-        try {
-            Thread.sleep(17);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (true) {
+            ScreenManager.getInstance().getStackScreen().peek().update();
+            repaint();
+            try {
+                Thread.sleep(17);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-
-        gameLoop();
-
     }
 
     @Override

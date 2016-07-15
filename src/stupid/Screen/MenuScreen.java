@@ -53,13 +53,19 @@ public class MenuScreen extends Screen {
         switch (e.getButton()) {
             case 1:
                 if (currentMousePos.isInside(OPTIONGAME_POSITION)) {
-                    ScreenManager.push(new GameLoadingScreen());
-                    Thread thread = new Thread(new FishLoader());
-                    thread.start();
+                    if (isInit == false) {
+                        isInit = true;
+                        ScreenManager.push(new GameLoadingScreen());
+                        Thread thread = new Thread(new FishLoader());
+                        thread.start();
+                    } else {
+                        ScreenManager.push(new GameSceenNormal());
+                    }
+
                 }
 
                 if (currentMousePos.isInside(OPTIONTIME_POSITION)) {
-                    ScreenManager.push(new GameScreenTime());
+                    //ScreenManager.push(new GameScreenTime());
                 }
                 if(currentMousePos.isInside(HELP_POSTION))
                 {

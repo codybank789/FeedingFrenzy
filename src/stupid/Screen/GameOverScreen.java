@@ -34,18 +34,22 @@ public class GameOverScreen extends Screen {
 
     @Override
     public void MouseClick(MouseEvent m) {
-
+        if (m.getButton() == 1){
+            if(currentMousePos.isInside(BACKBUTTON))
+            {
+                ScreenManager.pop();
+                ScreenManager.pop();
+                ScreenManager.pop();
+            }
+        }
     }
 
     @Override
     public void update() {
         if(count<300)
-            count++;
+            count+=5;
         updateMouseLocal();
-        if(currentMousePos.isInside(BACKBUTTON))
-        {
-            ScreenManager.pop();
-        }
+
     }
 
     @Override

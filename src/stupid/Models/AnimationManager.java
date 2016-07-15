@@ -39,10 +39,6 @@ public class AnimationManager {
     }
 
     public void resize(int size) {
-        isLocked = true;
-        setAnimation(0);
-        getCurrentAnimation().setResize(size);
-        isLocked = false;
 
         Enumeration<GameAnimation> animationEnumeration = animationList.elements();
 

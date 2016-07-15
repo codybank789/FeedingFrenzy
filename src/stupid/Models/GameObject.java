@@ -14,7 +14,7 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
     public static Vector<GameObject> allObjects = new Vector<>();
 
     public Position pos;
-
+    public int size;
     public ObjectManagerInterface manager;
     public Vector<GameObject> childList = new Vector<>();
     public AnimationManager animationManager = new AnimationManager();
@@ -40,7 +40,10 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
     }
 
     public void resize(int size) {
+        this.size = size;
         animationManager.resize(size);
+        pos.w = animationManager.getWidth();
+        pos.h = animationManager.getHeight();
     }
 
     public void flip() {
@@ -87,6 +90,7 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
 
     @Override
     public void draw(Graphics g) {
+        g.drawString(String.valueOf(size), (int)pos.x, (int)pos.y);
         g.drawRect((int)pos.x, (int)pos.y, (int)pos.w, (int)pos.h);
     }
 }

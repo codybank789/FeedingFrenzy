@@ -38,7 +38,9 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     @Override
     public void update() {
         if (childList.size() < 6) {
-            childList.add(new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this));
+            AutoFish newFish = new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this);
+            newFish.resize((int)(Math.random()*1000)%3);
+            childList.add(newFish);
         }
 
         Enumeration<GameObject> all = childList.elements();
@@ -73,5 +75,9 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     @Override
     public void callbackDelete(GameObject gameObject) {
         childList.remove(gameObject);
+        if (gameObject instanceof PlayerFish) {
+            ScreenManager.push(new GameOverScreen());
+        }
+
     }
 }
