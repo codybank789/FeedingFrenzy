@@ -39,7 +39,6 @@ public class GameImage{
         this.objectImage = objectImage;
     }
 
-
     public void flipImage() {
         AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
         tx.translate(-objectImage.getWidth(null), 0);
@@ -47,11 +46,13 @@ public class GameImage{
         objectImage = op.filter(objectImage, null);
     }
 
-    public void resizeImage(int newWidth, int newHeight) {
+    public GameImage resizeImage(int newWidth, int newHeight) {
         Image tmp = objectImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
         BufferedImage newPlaneImage = new BufferedImage(newWidth, newHeight,BufferedImage.TYPE_INT_ARGB);
         newPlaneImage.getGraphics().drawImage(tmp,0,0,null);
         objectImage = newPlaneImage;
+
+        return this;
     }
 
     public void resizeImage(double time) {

@@ -2,6 +2,7 @@ package stupid.GameObjects;
 
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
+import stupid.Interface.PositionFeed;
 import stupid.Models.GameImage;
 import stupid.Models.GameObject;
 import stupid.Models.Position;
@@ -23,6 +24,8 @@ public class IncreaseSizeItem extends GameObject {
         pos.direction = 1;
         pos.w = objectImage.getWidth();
         pos.h = objectImage.getHeight();
+
+        positionFeed = PositionFeed.moveDown();
     }
 
     public void update() {
@@ -43,8 +46,4 @@ public class IncreaseSizeItem extends GameObject {
 
     }
 
-    @Override
-    public Position positionFeed() {
-        return destination;
-    }
 }

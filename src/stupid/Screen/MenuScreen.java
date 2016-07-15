@@ -1,5 +1,6 @@
 package stupid.Screen;
 
+import stupid.GameWindow;
 import stupid.Interface.ScreenListener;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
@@ -17,7 +18,7 @@ import java.io.IOException;
  */
 public class MenuScreen extends Screen {
     boolean isInit = false;
-    private static GameImage backGround = new GameImage("res/image 881.jpg");
+    private static GameImage backGround = new GameImage("res/image 881.jpg").resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
     private static GameImage title = new GameImage("res/image 681.png");
     private static GameImage optionNewGame = new GameImage("res/image 684.png");
     private static GameImage optionNewGameClick = new GameImage("res/image 686.png");

@@ -1,8 +1,10 @@
 package stupid.Models;
 
+import stupid.GameObjects.PlayerFish;
 import stupid.GameWindow;
 import stupid.Interface.DisplayInterface;
 import stupid.Interface.ObjectManagerInterface;
+import stupid.Interface.PositionFeed;
 
 import java.awt.*;
 import java.util.*;
@@ -13,6 +15,10 @@ import java.util.*;
 abstract public class GameObject implements DisplayInterface, ObjectManagerInterface{
     public static Vector<GameObject> allObjects = new Vector<>();
 
+    public static PlayerFish playerFish;
+
+
+    public PositionFeed positionFeed;
     public Position pos;
     public int size;
     public ObjectManagerInterface manager;
@@ -28,6 +34,10 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
 
             this.manager = manager;
         allObjects.add(this);
+
+        if (this instanceof PlayerFish) {
+            playerFish = (PlayerFish)this;
+        }
     }
 
     public void remove() {
@@ -59,11 +69,17 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
         childList.remove(object);
     }
 
-    abstract public Position positionFeed();
+    public void setPositionFeed(PositionFeed positionFeed) {
+        this.positionFeed = positionFeed;
+    }
 
     @Override
     public void update() {
-        Position pInfo = positionFeed();
+        if (positionFeed == null) {
+            positionFeed = PositionFeed.moveRandomly();
+        }
+
+        Position pInfo = positionFeed.getPos(pos);
 
         int delta = (int)(pos.x - pInfo.x);
 

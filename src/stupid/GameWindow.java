@@ -23,10 +23,9 @@ import java.io.IOException;
  * Created by NguyenDuc on 7/13/2016.
  */
 public class GameWindow extends Frame implements Runnable, ObjectManagerInterface{
-    public static final int WINDOWWIDTH = 800;
-    public static final int WINDOWHEIGHT = 600;
+    public static final int WINDOWWIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+    public static final int WINDOWHEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
-    BufferedImage background;
     BufferedImage bufferedScreen = new BufferedImage(WINDOWWIDTH, WINDOWHEIGHT, BufferedImage.TYPE_INT_ARGB);
 
 

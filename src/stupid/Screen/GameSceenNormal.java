@@ -6,6 +6,7 @@ import stupid.GameObjects.Pearl;
 import stupid.GameObjects.PlayerFish;
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
+import stupid.Interface.PositionFeed;
 import stupid.Interface.ScreenListener;
 import stupid.Models.GameImage;
 import stupid.Models.GameObject;
@@ -25,11 +26,12 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     Vector<GameObject> childList = new Vector<>();
     PlayerFish playerFish;
     Pearl pearl;
-    public static GameImage background = new GameImage("res/image 672.jpg");
+    public static GameImage background = new GameImage("res/image 672.jpg").resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
 
     public GameSceenNormal() {
 
         playerFish = new PlayerFish(0, 1, Position.RANDOMINSIDESCREEN(), this);
+        childList.add(playerFish);
 //        pearl= new Pearl();
     }
 
@@ -40,8 +42,15 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     @Override
     public void update() {
         if (childList.size() < 6) {
-            AutoFish newFish = new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this);
-            newFish.resize((int)(Math.random()*1000)%2);
+            //AutoFish newFish = new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this);
+            //newFish.resize((int)(Math.random()*1000)%2);
+            //childList.add(newFish);
+        }
+
+        if (childList.size() < 2) {
+            AutoFish newFish = new AutoFish(5, 1, Position.RANDOMOUTSIDESCREEN(), this);
+            newFish.resize(2);
+            newFish.setPositionFeed(PositionFeed.moveToPlayer);
             childList.add(newFish);
         }
 
@@ -54,7 +63,6 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         while (all.hasMoreElements()) {
             all.nextElement().update();
         }
-        playerFish.update();
     }
 
     @Override
@@ -65,7 +73,6 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         while (all.hasMoreElements()) {
             all.nextElement().draw(g);
         }
-        playerFish.draw(g);
 //        ;pearl.draw(g)
     }
 

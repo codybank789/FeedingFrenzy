@@ -1,6 +1,7 @@
 package stupid.GameObjects;
 
 import stupid.Interface.ObjectManagerInterface;
+import stupid.Interface.PositionFeed;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameAnimation;
 import stupid.Models.GameObject;
@@ -28,6 +29,8 @@ public class PlayerFish extends GameObject {
         pos.direction = direction;
         pos.w = animationManager.getWidth();
         pos.h = animationManager.getHeight();
+
+        positionFeed = PositionFeed.followMouse;
     }
 
     public void update() {
@@ -80,9 +83,4 @@ public class PlayerFish extends GameObject {
 
     }
 
-    @Override
-    public Position positionFeed() {
-        pInfo = MouseInfo.getPointerInfo();
-        return new Position(pInfo.getLocation().x, pInfo.getLocation().y);
-    }
 }

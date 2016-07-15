@@ -77,15 +77,6 @@ public class AutoFish extends GameObject {
                 resize(++size);
             fishEaten = 0;
         }
-    }
 
-    @Override
-    public Position positionFeed() {
-        count++;
-        if (count > 180 || lastPos == null) {
-            count = 0;
-            lastPos = Position.RANDOM();
-        }
-        return lastPos;
     }
 }

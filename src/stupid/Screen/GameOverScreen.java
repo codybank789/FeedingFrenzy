@@ -1,5 +1,6 @@
 package stupid.Screen;
 
+import stupid.GameWindow;
 import stupid.Interface.ScreenListener;
 import stupid.Models.GameImage;
 import stupid.Models.Position;
@@ -18,7 +19,7 @@ public class GameOverScreen extends Screen {
     private static final String R_RS = "res/image 135.png";
     private static final String Y_RS = "res/image 137.png";
     private static final String BACK_RS = "res/backbutton.png";
-    private static GameImage backGround =new GameImage(BACKGROUND);;
+    private static GameImage backGround =new GameImage(BACKGROUND).resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
     private static GameImage sImage = new GameImage(S_RS);
     private static GameImage oImage= new GameImage(O_RS);
     private static GameImage  rImage= new GameImage(R_RS);

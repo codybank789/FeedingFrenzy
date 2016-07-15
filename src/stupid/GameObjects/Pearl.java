@@ -29,10 +29,6 @@ public class Pearl extends GameObject implements ObjectManagerInterface {
         pearlImage = new GameImage(WHITEPEARL_RS);
     }
 
-    @Override
-    public Position positionFeed() {
-        return POSITION;
-    }
 
     public void checkCaneat()
     {
