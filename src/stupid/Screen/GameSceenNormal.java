@@ -23,10 +23,10 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     private ScoreBoard scoreBoard;
     public static GameImage background = new GameImage("res/image 672.jpg").resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
 
-    public GameSceenNormal() {
+    public GameSceenNormal(int typeofFish) {
         pearl= new Pearl();
         childList.add(pearl);
-        playerFish = new PlayerFish(0, 1, Position.RANDOMINSIDESCREEN(), this);
+        playerFish = new PlayerFish(typeofFish, 1, Position.RANDOMINSIDESCREEN(), this);
         playerFish.resize(0);
         childList.add(playerFish);
         screenSound = new GameSoundReader("res/sounds/stageIntro.wav");

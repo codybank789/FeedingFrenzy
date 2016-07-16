@@ -1,6 +1,8 @@
 package stupid.Screen;
 
 import stupid.GameWindow;
+import stupid.Interface.ScreenListener;
+import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
 import stupid.Models.Position;
 
@@ -12,7 +14,8 @@ import java.awt.event.MouseEvent;
  */
 public class ChooseFishScreen extends Screen {
 
-    private GameImage backGround = new GameImage("res/image 876.png").resizeImage(GameWindow.WINDOWWIDTH,GameWindow.WINDOWHEIGHT);
+    boolean isInit = false;
+    private GameImage backGround = new GameImage("res/image 876.jpg").resizeImage(GameWindow.WINDOWWIDTH,GameWindow.WINDOWHEIGHT);
     private GameImage fish1 = new GameImage("res/Fish/Fish1/001.png");
     private GameImage fish3 = new GameImage("res/Fish/Fish3/001.png");
     private GameImage fish7 = new GameImage("res/Fish/Fish7/001.png");
@@ -31,18 +34,63 @@ public class ChooseFishScreen extends Screen {
         switch (m.getButton())
         {
             case 1:
-                if(currentMousePos.isInside(new Position(GameWindow.WINDOWWIDTH*2/5,
+                if(currentMousePos.isInside(new Position(GameWindow.WINDOWWIDTH*1/5-150,
                         GameWindow.WINDOWHEIGHT/3,fish1.getWidth(),fish1.getHeight())))
                         {
                             tyfeOfFish = 1;
+                            if (isInit == false) {
+                                isInit = true;
+
+                                GameLoadingScreen gameLoadingScreen = new GameLoadingScreen();
+                                gameLoadingScreen.addScreenListener(new ScreenListener() {
+                                    @Override
+                                    public void onChildScreenFinish() {
+                                    }
+                                });
+                                ScreenManager.push(gameLoadingScreen);
+                                Thread thread = new Thread(new FishLoader());
+                                thread.start();
+                            } else {
+                                ScreenManager.push(new GameSceenNormal(tyfeOfFish-1));
+                            }
                         }
-                if(currentMousePos.isInside(new Position(GameWindow.WINDOWWIDTH*3/5,
+                if(currentMousePos.isInside(new Position(GameWindow.WINDOWWIDTH*2/5,
                     GameWindow.WINDOWHEIGHT/3,fish1.getWidth(),fish1.getHeight())))
                         {
+                            if (isInit == false) {
+                                isInit = true;
+
+                                GameLoadingScreen gameLoadingScreen = new GameLoadingScreen();
+                                gameLoadingScreen.addScreenListener(new ScreenListener() {
+                                    @Override
+                                    public void onChildScreenFinish() {
+                                    }
+                                });
+                                ScreenManager.push(gameLoadingScreen);
+                                Thread thread = new Thread(new FishLoader());
+                                thread.start();
+                            } else {
+                                ScreenManager.push(new GameSceenNormal(tyfeOfFish-1));
+                            }
                             tyfeOfFish = 3;
                         }
-                if(currentMousePos.isInside(new Position(GameWindow.WINDOWWIDTH*4/5, GameWindow.WINDOWHEIGHT/3,fish1.getWidth(),fish1.getHeight())))
+                if(currentMousePos.isInside(new Position(GameWindow.WINDOWWIDTH*3/5+150, GameWindow.WINDOWHEIGHT/3,fish1.getWidth(),fish1.getHeight())))
                         {
+                            if (isInit == false) {
+                                isInit = true;
+
+                                GameLoadingScreen gameLoadingScreen = new GameLoadingScreen();
+                                gameLoadingScreen.addScreenListener(new ScreenListener() {
+                                    @Override
+                                    public void onChildScreenFinish() {
+                                    }
+                                });
+                                ScreenManager.push(gameLoadingScreen);
+                                Thread thread = new Thread(new FishLoader());
+                                thread.start();
+                            } else {
+                                ScreenManager.push(new GameSceenNormal(tyfeOfFish-1));
+                            }
                             tyfeOfFish = 7;
                         }
                 break;
@@ -60,9 +108,15 @@ public class ChooseFishScreen extends Screen {
     @Override
     public void draw(Graphics g) {
         backGround.draw(g,new Position(0,0));
-        fish1.draw(g,new Position(GameWindow.WINDOWWIDTH*2/5,GameWindow.WINDOWHEIGHT/3));
-        fish3.draw(g,new Position(GameWindow.WINDOWWIDTH*3/5,GameWindow.WINDOWHEIGHT/3));
-        fish7.draw(g,new Position(GameWindow.WINDOWWIDTH*4/5,GameWindow.WINDOWHEIGHT/3));
+        fish1.draw(g,new Position(GameWindow.WINDOWWIDTH*1/5-150,GameWindow.WINDOWHEIGHT/3));
+        fish3.draw(g,new Position(GameWindow.WINDOWWIDTH*2/5,GameWindow.WINDOWHEIGHT/3));
+        fish7.draw(g,new Position(GameWindow.WINDOWWIDTH*3/5+150,GameWindow.WINDOWHEIGHT/3));
 
+    }
+    private void loadImage() {
+        if (isInit == false) {
+            FishLoader.initImage();
+            isInit = true;
+        }
     }
 }

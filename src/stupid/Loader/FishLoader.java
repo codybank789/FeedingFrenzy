@@ -74,6 +74,7 @@ public class FishLoader implements Runnable{
                     }
                 }
         }
+        System.out.println(loadedImages);
 
     }
 
@@ -239,10 +240,10 @@ public class FishLoader implements Runnable{
     }
 
     public static double getPercentage() {
-        return (double) loadedImages/1378;
+        return (double) loadedImages/1382;
     }
 
     public static boolean isDone() {
-        return  loadedImages == 1378;
+        return  loadedImages == 1382;
     }
 }

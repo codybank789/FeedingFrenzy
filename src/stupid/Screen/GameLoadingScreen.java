@@ -38,7 +38,7 @@ public class GameLoadingScreen extends Screen {
     @Override
     public void update() {
         if (FishLoader.isDone()) {
-            GameSceenNormal gameSceenNormal = new GameSceenNormal();
+            GameSceenNormal gameSceenNormal = new GameSceenNormal(ChooseFishScreen.tyfeOfFish-1);
             gameSceenNormal.addScreenListener(new ScreenListener() {
                 @Override
                 public void onChildScreenFinish() {

@@ -20,7 +20,7 @@ import java.io.*;
  * Created by Yuu on 7/14/2016.
  */
 public class MenuScreen extends Screen {
-    boolean isInit = false;
+
     private static GameImage backGround = new GameImage("res/image 881.jpg").resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
     private static GameImage title = new GameImage("res/image 681.png");
     private static GameImage optionNewGame = new GameImage("res/image 684.png");
@@ -51,22 +51,8 @@ public class MenuScreen extends Screen {
         switch (e.getButton()) {
             case 1:
                 if (currentMousePos.isInside(OPTIONGAME_POSITION)) {
-                    if (isInit == false) {
-                        isInit = true;
 
-                        GameLoadingScreen gameLoadingScreen = new GameLoadingScreen();
-                        gameLoadingScreen.addScreenListener(new ScreenListener() {
-                            @Override
-                            public void onChildScreenFinish() {
-                            }
-                        });
-                        ScreenManager.push(gameLoadingScreen);
-                        Thread thread = new Thread(new FishLoader());
-                        thread.start();
-                    } else {
-                        ScreenManager.push(new GameSceenNormal());
-                    }
-
+                        ScreenManager.push(new ChooseFishScreen());
                 }
 
                 if (currentMousePos.isInside(OPTIONTIME_POSITION)) {
@@ -79,13 +65,6 @@ public class MenuScreen extends Screen {
                 break;
             default:
                 break;
-        }
-    }
-
-    private void loadImage() {
-        if (isInit == false) {
-            FishLoader.initImage();
-            isInit = true;
         }
     }
 

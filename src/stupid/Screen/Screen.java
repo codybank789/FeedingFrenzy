@@ -27,9 +27,9 @@ public abstract class Screen {
     public abstract void update();
     public abstract void draw(Graphics g);
     public void onResume() {
-        screenSound.play();
+        //screenSound.play();
     };
     public void onPause() {
-        screenSound.stop();
+        //screenSound.stop();
     };
 }
