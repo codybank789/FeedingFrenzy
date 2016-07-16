@@ -51,12 +51,16 @@ public class AnimationManager {
         }
     }
 
-    public void flip() {
+    public boolean flip() {
+        if (isLocked) return false;
+
         Enumeration<GameAnimation> animationEnumeration = animationList.elements();
 
         while(animationEnumeration.hasMoreElements()) {
             animationEnumeration.nextElement().flipAnimation();
         }
+
+        return true;
     }
 
     public int getWidth() {
@@ -96,7 +100,27 @@ public class AnimationManager {
                 });
             }
         });
+    }
 
+    public void eating() {
+        setAnimation(2);
+        animationList.get(2).speed = 5;
+        isLocked = true;
 
+        currentAnimation.getFirst().addListener(new AnimationListener() {
+            @Override
+            public void animationFinished() {
+                isLocked = false;
+
+                currentAnimation.removeFirst();
+
+                animationList.get(0).addListener(new AnimationListener() {
+                    @Override
+                    public void animationFinished() {
+                        currentAnimation.removeFirst();
+                    }
+                });
+            }
+        });
     }
 }

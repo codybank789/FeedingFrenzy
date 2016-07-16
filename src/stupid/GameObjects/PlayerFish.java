@@ -12,10 +12,10 @@ import java.util.Enumeration;
  */
 public class PlayerFish extends GameObject {
 
-    public int fishEaten = 0;
     PointerInfo pInfo = MouseInfo.getPointerInfo();
     ScoreBoard scoreBoard = new ScoreBoard();
     private static GameSoundReader biteSound;
+
     public PlayerFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
         speed = 5;
@@ -49,46 +49,43 @@ public class PlayerFish extends GameObject {
                     if (mounthPos.isCollide(current.pos)) {
                         if (size >= current.size) {
                             current.remove();
-                            fishEaten++;
                             BiteImage b = new BiteImage(this);
                             childList.add(b);
                             biteSound = new GameSoundReader("res/sounds/bite1.wav");
                             biteSound.playOnce();
-                            System.out.println("added");
-                            scoreBoard.score += 30;
-                        } else {
-                            scoreBoard.score -= 50;
-                            scoreBoard.health -= 1;
+                            scoreBoard.increaseScore(30);
+                            animationManager.eating();
                         }
                     }
                 } else if (current instanceof IncreaseSizeItem) {
                     if (mounthPos.isCollide(current.pos)) {
                         current.remove();
-                        fishEaten+=3;
+                        animationManager.eating();
+                        scoreBoard.increaseScore(ScoreBoard.LEVELUP/2);
                     }
                 }
             }
         }
 
-        if (fishEaten > 2) {
+
+        if (scoreBoard.score > ScoreBoard.LEVELUP) {
             if (size < 2)
                 resize(++size);
-            fishEaten = 0;
+            scoreBoard.levelup();
         }
 
         Enumeration<GameObject> allchilds = childList.elements();
         while (allchilds.hasMoreElements()) {
             allchilds.nextElement().update();
         }
-
     }
 
     @Override
     public void draw(Graphics g) {
         super.draw(g);
         scoreBoard.draw(g);
-        Position mounthPos = pos.getCustomBox(1, 0.3, 0.3, 0.4, true);
-        g.drawRect((int) mounthPos.x, (int) mounthPos.y, (int) mounthPos.w, (int) mounthPos.h);
+        //Position mounthPos = pos.getCustomBox(1, 0.3, 0.3, 0.4, true);
+        //g.drawRect((int) mounthPos.x, (int) mounthPos.y, (int) mounthPos.w, (int) mounthPos.h);
         animationManager.getCurrentAnimation().draw(g, pos);
         Enumeration<GameObject> all = childList.elements();
         while (all.hasMoreElements()) {

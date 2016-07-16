@@ -28,7 +28,9 @@ public class BiteImage extends GameObject {
     public void draw(Graphics g) {
         if(count<30)
         {
-            biteImage.draw(g,new Position(playerFish.pos.x,playerFish.pos.y));
+            playerFish.pos.direction *= -1;
+            biteImage.draw(g,playerFish.pos.getCustomBox(-0.8,0,0.7,0.7,true));
+            playerFish.pos.direction *= -1;
         }
         else {
             remove();

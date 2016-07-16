@@ -9,7 +9,7 @@ import stupid.GameWindow;
 public class Position {
     public double x, y;
     public double w, h;
-    public int direction;
+    public int direction = -1;
 
 
     public Position(double x, double y, double w, double h) {
@@ -46,7 +46,7 @@ public class Position {
     public Position getCustomBox(double xFactor, double yFactor, double wFactor, double hFactor, boolean dirAware) {
         Position point = getCustomPosition(xFactor, yFactor, dirAware);
         if (dirAware) {
-            if (direction == 1) {
+            if (direction == -1) {
                 return new Position(point.x, point.y, w*wFactor, h*hFactor);
             } else {
                 return new Position(point.x-w*wFactor, point.y, w*wFactor, h*hFactor);

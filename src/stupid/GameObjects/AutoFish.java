@@ -35,8 +35,8 @@ public class AutoFish extends GameObject {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        Position mounthPos = pos.getCustomBox(1, 0.3, 0.3, 0.4, true);
-        g.drawRect((int) mounthPos.x, (int) mounthPos.y, (int) mounthPos.w, (int) mounthPos.h);
+        //Position mounthPos = pos.getCustomBox(1, 0.3, 0.3, 0.4, true);
+        //g.drawRect((int) mounthPos.x, (int) mounthPos.y, (int) mounthPos.w, (int) mounthPos.h);
         animationManager.getCurrentAnimation().draw(g, pos);
     }
 
@@ -63,17 +63,28 @@ public class AutoFish extends GameObject {
 
                 if (mounthPos.isCollide(current.pos) && size > current.size) {
                     if (current instanceof PlayerFish) {
-                        if (((PlayerFish) current).scoreBoard.health == 0) {
-                            current.remove();
-                            fishEaten++;
+                        fishEaten++;
+
+                        if (lastTouch == false) {
+                            ((PlayerFish) current).scoreBoard.health -= 25;
+                            ((PlayerFish) current).scoreBoard.increaseScore(-50);
+                            if (((PlayerFish) current).scoreBoard.health == 0) {
+                                current.remove();
+                            }
                         }
+
+                        lastTouch = true;
                     } else {
+                        animationManager.eating();
                         current.remove();
                         fishEaten++;
                     }
+                } else if (current instanceof PlayerFish) {
+                    lastTouch = false;
                 }
             } else if (current instanceof IncreaseSizeItem) {
                 if (mounthPos.isCollide(current.pos)) {
+                    animationManager.eating();
                     current.remove();
                     fishEaten+=3;
                 }

@@ -55,7 +55,9 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
     }
 
     public void flip() {
-        animationManager.flip();
+        if (animationManager.flip()) {
+            pos.direction *= -1;
+        }
     }
 
     public void printPos() {
@@ -90,14 +92,12 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
             if (pos.direction == -1) {
                 flip();
                 animationManager.setAnimation(1);
-                pos.direction = 1;
             }
         } else if (delta < -5) {
             pos.x += speed;
             if (pos.direction == 1) {
                 flip();
                 animationManager.setAnimation(1);
-                pos.direction = -1;
             }
         }
 
@@ -108,8 +108,8 @@ abstract public class GameObject implements DisplayInterface, ObjectManagerInter
 
     @Override
     public void draw(Graphics g) {
-        g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        g.drawString(String.valueOf(pos.w), (int) pos.x, (int) pos.y);
-        g.drawRect((int) pos.x, (int) pos.y, (int) pos.w, (int) pos.h);
+        //g.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        //g.drawString(String.valueOf(pos.w), (int) pos.x, (int) pos.y);
+        //g.drawRect((int) pos.x, (int) pos.y, (int) pos.w, (int) pos.h);
     }
 }

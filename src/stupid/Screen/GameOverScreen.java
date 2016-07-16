@@ -56,6 +56,10 @@ public class GameOverScreen extends Screen {
 
     }
 
+    public void onResume() {
+        screenSound.playOnce();
+    }
+
     @Override
     public void draw(Graphics g) {
         backGround.draw(g,new Position(0,0));

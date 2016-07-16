@@ -40,6 +40,9 @@ public class FishLoader implements Runnable{
                     for (m = 0; m < 3 - length; m++)
                         value = "0" + value;
                     listImage[i][j][k][0].add(new GameImage("res/Fish" + "/Fish" + String.valueOf(j + 1) + "/" + value + ".png"));
+                    if (j <= 8) {
+                        listImage[i][j][k][0].lastElement().resizeImage(150, 150);
+                    }
                 }
             }
         }

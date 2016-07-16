@@ -4,10 +4,7 @@ import stupid.GameObjects.*;
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
 import stupid.Interface.ScreenListener;
-import stupid.Models.GameImage;
-import stupid.Models.GameObject;
-import stupid.Models.GameSoundReader;
-import stupid.Models.Position;
+import stupid.Models.*;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -30,6 +27,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         pearl= new Pearl();
         childList.add(pearl);
         playerFish = new PlayerFish(0, 1, Position.RANDOMINSIDESCREEN(), this);
+        playerFish.resize(0);
         childList.add(playerFish);
         screenSound = new GameSoundReader("res/sounds/stageIntro.wav");
          scoreBoard = new ScoreBoard();
@@ -41,9 +39,17 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
 
     @Override
     public void update() {
-        if (childList.size() < 6) {
-            AutoFish newFish = new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this);
-            //newFish.resize((int)(Math.random()*1000)%2);
+        if (childList.size() < 9) {
+            AutoFish newFish = new AutoFish((int) (Math.random()*8), 1, Position.RANDOMOUTSIDESCREEN(), this);
+            if (childList.size() > 4) {
+                newFish.resize(0);
+            } else {
+                newFish.resize(0);
+                if (newFish.size == 2) {
+                    newFish.positionFeed = PositionFeed.moveToPlayer;
+                }
+            }
+
             childList.add(newFish);
             System.out.println(childList.size());
         }
@@ -55,7 +61,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
             //childList.add(newFish);
         }
 
-        if ((int)(Math.random()*1000)%100 == 0) {
+        if ((int)(Math.random()*1000)%600 == 0) {
             //System.out.println("added");
             childList.add(new IncreaseSizeItem(this));
         }
@@ -74,14 +80,13 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         while (all.hasMoreElements()) {
             all.nextElement().draw(g);
         }
-        scoreBoard.draw(g);
     }
 
     @Override
     public void onResume() {
         screenSound.playOnce();
-        ScreenManager.frame.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB)
-                , new Point(0, 0), "custom cursor"));
+       // ScreenManager.frame.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB)
+        //        , new Point(0, 0), "custom cursor"));
     }
 
     @Override
