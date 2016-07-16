@@ -4,6 +4,7 @@ import stupid.GameWindow;
 import stupid.Interface.ScreenListener;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
+import stupid.Models.GameSoundReader;
 import stupid.Models.Position;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
@@ -19,6 +20,7 @@ import java.io.*;
  */
 public class MenuScreen extends Screen {
     boolean isInit = false;
+    private GameSoundReader gameSoundReader;
     private static GameImage backGround = new GameImage("res/image 881.jpg").resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
     private static GameImage title = new GameImage("res/image 681.png");
     private static GameImage optionNewGame = new GameImage("res/image 684.png");
@@ -41,6 +43,8 @@ public class MenuScreen extends Screen {
     public MenuScreen() {
         optionnew = optionNewGame;
         optiontime = optionTime;
+        gameSoundReader = new GameSoundReader("res/music/menuMusic.wav");
+        gameSoundReader.playSound();
     }
 
     public void MouseClick(MouseEvent e) {
