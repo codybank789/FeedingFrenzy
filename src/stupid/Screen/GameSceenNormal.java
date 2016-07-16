@@ -75,7 +75,6 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     @Override
     public void draw(Graphics g) {
         background.draw(g, new Position(0, 0));
-
         Enumeration<GameObject> all = childList.elements();
         while (all.hasMoreElements()) {
             all.nextElement().draw(g);

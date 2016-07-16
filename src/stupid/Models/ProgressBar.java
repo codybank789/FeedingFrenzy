@@ -17,7 +17,6 @@ public class ProgressBar {
     public void updatePercentage(Position pos, double percentage, Graphics g) {
         this.percentage = percentage;
         g.setColor(Color.YELLOW);
-        //g.drawRect((int)(pos.x), (int)pos.y, width, height);
         g.setColor(Color.YELLOW);
         g.fillRect((int)(pos.x), (int)pos.y, (int) (percentage * width), height);
     }
