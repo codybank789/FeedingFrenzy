@@ -1,11 +1,8 @@
 package stupid.GameObjects;
 
 import stupid.Interface.ObjectManagerInterface;
-import stupid.Models.PositionFeed;
+import stupid.Models.*;
 import stupid.Loader.FishLoader;
-import stupid.Models.GameAnimation;
-import stupid.Models.GameObject;
-import stupid.Models.Position;
 
 import java.awt.*;
 import java.util.Enumeration;
@@ -17,7 +14,7 @@ public class PlayerFish extends GameObject {
 
     public int fishEaten = 0;
     PointerInfo pInfo = MouseInfo.getPointerInfo();
-
+    private static GameSoundReader biteSound;
     public PlayerFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
         speed = 5;
@@ -53,6 +50,8 @@ public class PlayerFish extends GameObject {
                         fishEaten++;
                         BiteImage b = new BiteImage(this);
                         childList.add(b);
+                        biteSound = new GameSoundReader("res/sounds/bite1.wav");
+                        biteSound.playOnce();
                     }
                 } else if (current instanceof IncreaseSizeItem) {
                     if (mounthPos.isCollide(current.pos)) {

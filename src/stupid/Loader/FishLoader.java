@@ -72,7 +72,6 @@ public class FishLoader implements Runnable{
                 }
         }
 
-        System.out.println(loadedImages + "ádfasdf");
     }
 
     public static Vector getImages(int size, int typeFish, int typeAnimation, int flip) {
