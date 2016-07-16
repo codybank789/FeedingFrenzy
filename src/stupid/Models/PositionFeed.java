@@ -1,9 +1,7 @@
-package stupid.Interface;
+package stupid.Models;
 
 import stupid.GameObjects.PlayerFish;
 import stupid.GameWindow;
-import stupid.Models.GameObject;
-import stupid.Models.Position;
 
 import java.awt.*;
 

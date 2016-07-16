@@ -23,9 +23,6 @@ import java.net.URL;
 public class GameSoundReader {
 
     private Clip player;
-    private File inputFile;
-    private DataLine.Info dataline;
-    private AudioFormat format;
     private AudioInputStream stream;
 
 
@@ -33,8 +30,7 @@ public class GameSoundReader {
     {
         try
         {
-            inputFile = new File(soundRes);
-            stream = AudioSystem.getAudioInputStream(this.getClass().getResource(soundRes));
+            stream = AudioSystem.getAudioInputStream(new File(soundRes));
             player = AudioSystem.getClip();
             player.open(stream);
         }catch (Exception e){
@@ -44,8 +40,14 @@ public class GameSoundReader {
     }
 
 
-    public void playSound()
+    public void play()
     {
-        player.start();
+        player.loop(Clip.LOOP_CONTINUOUSLY);
     }
+
+    public void playOnce() {
+        player.loop(0);
+    }
+
+    public void stop() {player.stop();}
 }

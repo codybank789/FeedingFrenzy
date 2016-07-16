@@ -4,7 +4,6 @@ import stupid.GameObjects.PlayerFish;
 import stupid.GameWindow;
 import stupid.Interface.DisplayInterface;
 import stupid.Interface.ObjectManagerInterface;
-import stupid.Interface.PositionFeed;
 
 import java.awt.*;
 import java.util.*;

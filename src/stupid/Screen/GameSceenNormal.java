@@ -6,10 +6,10 @@ import stupid.GameObjects.Pearl;
 import stupid.GameObjects.PlayerFish;
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
-import stupid.Interface.PositionFeed;
 import stupid.Interface.ScreenListener;
 import stupid.Models.GameImage;
 import stupid.Models.GameObject;
+import stupid.Models.GameSoundReader;
 import stupid.Models.Position;
 
 import java.awt.*;
@@ -33,7 +33,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         childList.add(pearl);
         playerFish = new PlayerFish(0, 1, Position.RANDOMINSIDESCREEN(), this);
         childList.add(playerFish);
-
+        screenSound = new GameSoundReader("res/sounds/stageIntro.wav");
     }
 
     @Override
@@ -78,18 +78,21 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
 
     @Override
     public void onResume() {
+        screenSound.playOnce();
         ScreenManager.frame.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB)
                 , new Point(0, 0), "custom cursor"));
     }
 
     @Override
     public void onPause() {
+        super.onPause();
         ScreenManager.frame.setCursor(Cursor.DEFAULT_CURSOR);
     }
 
     @Override
     public void callbackDelete(GameObject gameObject) {
         childList.remove(gameObject);
+        GameObject.allObjects.remove(gameObject);
         if (gameObject instanceof PlayerFish) {
             GameOverScreen gameOverScreen = new GameOverScreen();
             gameOverScreen.addScreenListener(new ScreenListener() {

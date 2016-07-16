@@ -3,6 +3,7 @@ package stupid.Screen;
 import stupid.GameWindow;
 import stupid.Interface.ScreenListener;
 import stupid.Models.GameImage;
+import stupid.Models.GameSoundReader;
 import stupid.Models.Position;
 
 import java.awt.*;
@@ -31,9 +32,8 @@ public class GameOverScreen extends Screen {
 
 
 
-    public GameOverScreen()
-    {
-
+    public GameOverScreen() {
+        screenSound = new GameSoundReader("res/sounds/GameOver.wav");
     }
 
     @Override
@@ -65,15 +65,5 @@ public class GameOverScreen extends Screen {
         if (count>=240) rImage.draw(g,new Position(650,300));
         if (count==300) yImage.draw(g,new Position(700,300));
         if(count==300) backButton.draw(g,BACKBUTTON);
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onPause() {
-
     }
 }

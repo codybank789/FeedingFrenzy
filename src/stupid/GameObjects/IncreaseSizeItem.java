@@ -2,7 +2,7 @@ package stupid.GameObjects;
 
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
-import stupid.Interface.PositionFeed;
+import stupid.Models.PositionFeed;
 import stupid.Models.GameImage;
 import stupid.Models.GameObject;
 import stupid.Models.Position;

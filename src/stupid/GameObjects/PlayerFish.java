@@ -1,7 +1,7 @@
 package stupid.GameObjects;
 
 import stupid.Interface.ObjectManagerInterface;
-import stupid.Interface.PositionFeed;
+import stupid.Models.PositionFeed;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameAnimation;
 import stupid.Models.GameObject;

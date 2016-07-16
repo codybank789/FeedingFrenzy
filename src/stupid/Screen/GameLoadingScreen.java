@@ -4,6 +4,7 @@ import stupid.GameWindow;
 import stupid.Interface.ScreenListener;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
+import stupid.Models.GameSoundReader;
 import stupid.Models.Position;
 import stupid.Models.ProgressBar;
 
@@ -27,6 +28,7 @@ public class GameLoadingScreen extends Screen {
         progressBar = new ProgressBar(378, 25);
         loadingImage = new GameImage(LOADINGIMG_RS);
         loadingImage.resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);
+        screenSound = new GameSoundReader("res/music/track1.wav");
     }
     @Override
     public void MouseClick(MouseEvent m) {
@@ -56,16 +58,6 @@ public class GameLoadingScreen extends Screen {
         loadingImage.draw(g, new Position(0, 0));
 
         progressBar.updatePercentage(new Position(495, 704), (double) FishLoader.getPercentage(), g);
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onPause() {
 
     }
 }

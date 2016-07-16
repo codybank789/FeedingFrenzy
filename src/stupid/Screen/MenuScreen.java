@@ -10,6 +10,7 @@ import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -20,7 +21,6 @@ import java.io.*;
  */
 public class MenuScreen extends Screen {
     boolean isInit = false;
-    private GameSoundReader gameSoundReader;
     private static GameImage backGround = new GameImage("res/image 881.jpg").resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
     private static GameImage title = new GameImage("res/image 681.png");
     private static GameImage optionNewGame = new GameImage("res/image 684.png");
@@ -43,8 +43,7 @@ public class MenuScreen extends Screen {
     public MenuScreen() {
         optionnew = optionNewGame;
         optiontime = optionTime;
-        gameSoundReader = new GameSoundReader("res/music/menuMusic.wav");
-        gameSoundReader.playSound();
+        screenSound = new GameSoundReader("res/music/menuMusic.wav");
     }
 
     public void MouseClick(MouseEvent e) {
@@ -119,13 +118,4 @@ public class MenuScreen extends Screen {
         helpButton.draw(g,HELP_POSTION);
     }
 
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
 }

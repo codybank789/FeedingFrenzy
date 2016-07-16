@@ -42,6 +42,8 @@ public class ScreenManager {
     }
 
     public static Screen pop() {
-        return stackScreen.pop();
+        Screen tmp = stackScreen.pop();
+        tmp.onPause();
+        return tmp;
     }
 }
