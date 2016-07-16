@@ -78,4 +78,10 @@ public class ScoreBoard extends GameObject {
             isLevelingUp = true;
         }
     }
+    public boolean iswinGame()
+    {
+        if(score >= 2000)
+            return true;
+        else return false;
+    }
 }
