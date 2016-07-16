@@ -1,9 +1,6 @@
 package stupid.Screen;
 
-import stupid.GameObjects.AutoFish;
-import stupid.GameObjects.IncreaseSizeItem;
-import stupid.GameObjects.Pearl;
-import stupid.GameObjects.PlayerFish;
+import stupid.GameObjects.*;
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
 import stupid.Interface.ScreenListener;
@@ -26,6 +23,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     Vector<GameObject> childList = new Vector<>();
     PlayerFish playerFish;
     Pearl pearl;
+    private ScoreBoard scoreBoard;
     public static GameImage background = new GameImage("res/image 672.jpg").resizeImage(GameWindow.WINDOWWIDTH, GameWindow.WINDOWHEIGHT);;
 
     public GameSceenNormal() {
@@ -34,6 +32,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         playerFish = new PlayerFish(0, 1, Position.RANDOMINSIDESCREEN(), this);
         childList.add(playerFish);
         screenSound = new GameSoundReader("res/sounds/stageIntro.wav");
+         scoreBoard = new ScoreBoard();
     }
 
     @Override
@@ -46,6 +45,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
             AutoFish newFish = new AutoFish((int) (Math.random()*5), 1, Position.RANDOMOUTSIDESCREEN(), this);
             //newFish.resize((int)(Math.random()*1000)%2);
             childList.add(newFish);
+            System.out.println(childList.size());
         }
 
         if (childList.size() < 2) {
@@ -74,6 +74,7 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
         while (all.hasMoreElements()) {
             all.nextElement().draw(g);
         }
+        scoreBoard.draw(g);
     }
 
     @Override

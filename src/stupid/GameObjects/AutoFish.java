@@ -63,6 +63,7 @@ public class AutoFish extends GameObject {
                 if (mounthPos.isCollide(current.pos) && size > current.size) {
                     current.remove();
                     fishEaten++;
+                    System.out.println("bố có xóa");
                 }
             } else if (current instanceof IncreaseSizeItem) {
                 if (mounthPos.isCollide(current.pos)) {
