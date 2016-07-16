@@ -1,7 +1,7 @@
 package stupid.GameObjects;
 
 import stupid.Interface.ObjectManagerInterface;
-import stupid.Interface.PositionFeed;
+import stupid.Models.PositionFeed;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameAnimation;
 import stupid.Models.GameObject;
@@ -51,7 +51,7 @@ public class PlayerFish extends GameObject {
                     if (mounthPos.isCollide(current.pos) && size >= current.size) {
                         current.remove();
                         fishEaten++;
-                        BiteImage b = new BiteImage();
+                        BiteImage b = new BiteImage(this);
                         childList.add(b);
                     }
                 } else if (current instanceof IncreaseSizeItem) {
@@ -68,9 +68,10 @@ public class PlayerFish extends GameObject {
                 resize(++size);
             fishEaten = 0;
         }
+
         Enumeration<GameObject> allchilds = childList.elements();
-        while (all.hasMoreElements()) {
-            all.nextElement().update();
+        while (allchilds.hasMoreElements()) {
+            allchilds.nextElement().update();
         }
 
     }
@@ -89,7 +90,6 @@ public class PlayerFish extends GameObject {
 
     @Override
     public void callbackDelete(GameObject gameObject) {
-        gameObject.remove();
         childList.remove(gameObject);
     }
 

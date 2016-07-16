@@ -1,5 +1,6 @@
 package stupid.GameObjects;
 
+import stupid.Interface.ObjectManagerInterface;
 import stupid.Models.GameImage;
 import stupid.Models.GameObject;
 
@@ -13,6 +14,10 @@ public class BiteImage extends GameObject {
     private GameImage biteImage = new GameImage("res/image 234.png");
     private int count;
 
+    public BiteImage(ObjectManagerInterface manager) {
+        this.manager = manager;
+    }
+
     @Override
     public void update() {
         count++;
@@ -25,7 +30,7 @@ public class BiteImage extends GameObject {
             biteImage.draw(g,playerFish.pos);
         }
         else {
-            manager.callbackDelete(this);
+            remove();
         }
     }
 
