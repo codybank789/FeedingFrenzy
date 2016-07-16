@@ -14,6 +14,7 @@ public class PlayerFish extends GameObject {
 
     public int fishEaten = 0;
     PointerInfo pInfo = MouseInfo.getPointerInfo();
+    ScoreBoard scoreBoard = new ScoreBoard();
     private static GameSoundReader biteSound;
     public PlayerFish(int fishType, int direction, Position initialPos, ObjectManagerInterface manager) {
         super(direction, initialPos, manager);
@@ -45,13 +46,20 @@ public class PlayerFish extends GameObject {
             GameObject current = all.nextElement();
             if (current != this) {
                 if (current instanceof AutoFish) {
-                    if (mounthPos.isCollide(current.pos) && size >= current.size) {
-                        current.remove();
-                        fishEaten++;
-                        BiteImage b = new BiteImage(this);
-                        childList.add(b);
-                        biteSound = new GameSoundReader("res/sounds/bite1.wav");
-                        biteSound.playOnce();
+                    if (mounthPos.isCollide(current.pos)) {
+                        if (size >= current.size) {
+                            current.remove();
+                            fishEaten++;
+                            BiteImage b = new BiteImage(this);
+                            childList.add(b);
+                            biteSound = new GameSoundReader("res/sounds/bite1.wav");
+                            biteSound.playOnce();
+                            System.out.println("added");
+                            scoreBoard.score += 30;
+                        } else {
+                            scoreBoard.score -= 50;
+                            scoreBoard.health -= 1;
+                        }
                     }
                 } else if (current instanceof IncreaseSizeItem) {
                     if (mounthPos.isCollide(current.pos)) {
@@ -78,6 +86,7 @@ public class PlayerFish extends GameObject {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
+        scoreBoard.draw(g);
         Position mounthPos = pos.getCustomBox(1, 0.3, 0.3, 0.4, true);
         g.drawRect((int) mounthPos.x, (int) mounthPos.y, (int) mounthPos.w, (int) mounthPos.h);
         animationManager.getCurrentAnimation().draw(g, pos);

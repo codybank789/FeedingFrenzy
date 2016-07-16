@@ -14,8 +14,8 @@ import java.awt.*;
  */
 public class ScoreBoard extends GameObject {
     private GameImage scoreBoard = new GameImage("res/image 810.png").resizeImage(GameWindow.WINDOWWIDTH,GameWindow.WINDOWHEIGHT/6);
-    private int score;
-    private int health=3;
+    public int score=0;
+    public int health=3;
     private ProgressBar progressBar;
     private ProgressBar progressBar1;
     public ScoreBoard()
@@ -27,10 +27,10 @@ public class ScoreBoard extends GameObject {
     @Override
     public void draw(Graphics g) {
         scoreBoard.draw(g,new Position(9,30));
-        progressBar.updatePercentage(new Position(175,116),score/15000,g);
-        progressBar.updatePercentage(new Position(935,123),health/3,g);
+        progressBar.updatePercentage(new Position(175,116),(double)score/15000,g);
+        progressBar.updatePercentage(new Position(935,123),(double)health/3,g);
         g.drawString(String.valueOf(score),962,65);
-
+        System.out.println(score);
     }
 
     @Override

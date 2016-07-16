@@ -14,6 +14,7 @@ import java.util.Enumeration;
  */
 public class AutoFish extends GameObject {
 
+    public boolean lastTouch = false;
     int count = 0;
     Position lastPos;
     private int fishEaten = 0;
@@ -61,9 +62,15 @@ public class AutoFish extends GameObject {
             if (current instanceof AutoFish || current instanceof PlayerFish) {
 
                 if (mounthPos.isCollide(current.pos) && size > current.size) {
-                    current.remove();
-                    fishEaten++;
-                    System.out.println("bố có xóa");
+                    if (current instanceof PlayerFish) {
+                        if (((PlayerFish) current).scoreBoard.health == 0) {
+                            current.remove();
+                            fishEaten++;
+                        }
+                    } else {
+                        current.remove();
+                        fishEaten++;
+                    }
                 }
             } else if (current instanceof IncreaseSizeItem) {
                 if (mounthPos.isCollide(current.pos)) {
