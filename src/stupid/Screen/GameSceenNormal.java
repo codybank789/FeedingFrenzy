@@ -91,7 +91,9 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
 
     @Override
     public void callbackDelete(GameObject gameObject) {
+        System.out.println(childList.size());
         childList.remove(gameObject);
+        System.out.println(childList.size());
         GameObject.allObjects.remove(gameObject);
         if (gameObject instanceof PlayerFish) {
             GameOverScreen gameOverScreen = new GameOverScreen();

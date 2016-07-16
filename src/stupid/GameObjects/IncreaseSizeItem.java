@@ -2,6 +2,7 @@ package stupid.GameObjects;
 
 import stupid.GameWindow;
 import stupid.Interface.ObjectManagerInterface;
+import stupid.Main;
 import stupid.Models.PositionFeed;
 import stupid.Models.GameImage;
 import stupid.Models.GameObject;
@@ -14,12 +15,10 @@ import java.awt.*;
  */
 public class IncreaseSizeItem extends GameObject {
 
-    Position destination;
     GameImage objectImage = new GameImage("res/image 755.png");
 
     public IncreaseSizeItem(ObjectManagerInterface manager) {
         super(1, new Position((int) (Math.random() * GameWindow.WINDOWWIDTH), 0), manager);
-        destination = new Position(pos.x, GameWindow.WINDOWHEIGHT+100);
 
         pos.direction = 1;
         pos.w = objectImage.getWidth();
@@ -30,7 +29,7 @@ public class IncreaseSizeItem extends GameObject {
 
     public void update() {
         super.update();
-        if (pos.y == destination.y) {
+        if (Math.abs(pos.y - GameWindow.WINDOWHEIGHT) <= 5){
             remove();
         }
     }
