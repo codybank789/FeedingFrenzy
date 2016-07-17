@@ -59,7 +59,7 @@ public class Pearl extends GameObject implements ObjectManagerInterface {
     @Override
     public void draw(Graphics g) {
         animationManager.getCurrentAnimation().draw(g,POSITION);
-        if(canEat)pearlImage.draw(g,new Position(POSITION.x+30,POSITION.y+70));
+        if(canEat)pearlImage.draw(g,new Position(POSITION.x+80,POSITION.y+110));
     }
 
     @Override

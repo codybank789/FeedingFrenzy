@@ -84,8 +84,8 @@ public class GameSceenNormal extends Screen implements ObjectManagerInterface{
     @Override
     public void onResume() {
         screenSound.playOnce();
-       // ScreenManager.frame.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB)
-        //        , new Point(0, 0), "custom cursor"));
+        ScreenManager.frame.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(new BufferedImage(1,1,BufferedImage.TYPE_INT_ARGB)
+                , new Point(0, 0), "custom cursor"));
     }
 
     @Override

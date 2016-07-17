@@ -52,7 +52,9 @@ public class MenuScreen extends Screen {
             case 1:
                 if (currentMousePos.isInside(OPTIONGAME_POSITION)) {
 
-                        ScreenManager.push(new ChooseFishScreen());
+                        ChooseFishScreen chooseFishScreen = new ChooseFishScreen();
+                        ScreenManager.push(chooseFishScreen);
+
                 }
 
                 if (currentMousePos.isInside(OPTIONTIME_POSITION)) {

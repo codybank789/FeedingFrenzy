@@ -4,6 +4,7 @@ import stupid.GameWindow;
 import stupid.Interface.ScreenListener;
 import stupid.Loader.FishLoader;
 import stupid.Models.GameImage;
+import stupid.Models.GameSoundReader;
 import stupid.Models.Position;
 
 import java.awt.*;
@@ -22,7 +23,7 @@ public class ChooseFishScreen extends Screen {
     public static int tyfeOfFish;
     public  ChooseFishScreen()
     {
-
+        screenSound = new GameSoundReader("res/sound/track1.wav");
     }
 
 
